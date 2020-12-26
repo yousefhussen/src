@@ -5,7 +5,8 @@ import java.io.IOException;
 public class Project {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        
+                        AdminMenu Admin = new AdminMenu();
+
          Booking b5 = new Booking();
          Customer c5 = new Customer();
          Car s5 = new Car();
