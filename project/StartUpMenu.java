@@ -29,7 +29,7 @@ public class StartUpMenu extends JFrame implements ActionListener {
         c.setLayout(null);
 
         setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Car Rental");
 //        setLayout(new FlowLayout(FlowLayout.CENTER , 100 , 250));
@@ -289,7 +289,6 @@ public class StartUpMenu extends JFrame implements ActionListener {
 
             Container b = getContentPane();
             b.setLayout(null);
-//hhhuuhh
             setTitle("Log In Admin");
             b3 = new JButton("Sign In");
             NA = new JLabel("username: ");
@@ -316,9 +315,11 @@ public class StartUpMenu extends JFrame implements ActionListener {
             
                 getContentPane().removeAll();
                 getContentPane().repaint();
-
+                
                 Container bb = getContentPane();
                 bb.setLayout(null);
+                dispose();
+                AdminMenu Admin = new AdminMenu();
 
               
             } else {

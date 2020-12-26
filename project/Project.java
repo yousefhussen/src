@@ -12,7 +12,7 @@ public class Project {
 
         ReadAndWrite w1;
         w1 = new ReadAndWrite();
-    // w1.Read();
+   // w1.Read();
       Car c1 = new Car(" 2010" , " seat" , 1300);
       Car c2 = new Car(" 2015" , " mg" , 1500);
       Car.addCar(c1);
