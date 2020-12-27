@@ -58,16 +58,26 @@ public class AdminMenu extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(ViewB)) {
+        if (e.getSource().equals(ViewB)||e.getSource().equals(AddB)||e.getSource().equals(DeleteB)||e.getSource().equals(EditB) ) {
             
             //default drawings
             defaultDrawings();
             //
-            
-            
-            
-
         }
+        else if (e.getSource().equals(BookingB))
+        {
+             System.out.println("edit or delete or add or view");
+            Bookingdrwaings();
+        }
+        else if(e.getSource().equals(CarB))
+        {
+            
+        }
+        else if(e.getSource().equals(CustomerB))
+        {
+            
+        }
+
 
     }
     
@@ -99,10 +109,31 @@ public class AdminMenu extends JFrame implements ActionListener {
             BookingB.setBounds(120, 0, 190, 40);
             CarB.setBounds(120+190, 0, 190, 40);
             CustomerB.setBounds(120+380, 0, 190, 40);
+            BookingB.addActionListener(this);
+            CarB.addActionListener(this);
+            CustomerB.addActionListener(this);
             c.add(BookingB);
             c.add(CarB);
             c.add(CustomerB);
             
+    }
+    
+    public void Bookingdrwaings()
+    {
+        if(ViewB.isSelected())
+        {
+             System.out.println("edit or delete or add or view");
+            Integer[] ids=new Integer [Booking.getBooking_List().size()];
+            for(int i = 0; i<Booking.getBooking_List().size();i++)
+            {
+                ids[i]=Booking.getBooking_List().get(i).getBooking_id();
+                 System.out.println(ids[i]);
+            }
+            JComboBox ID = new JComboBox(ids);
+            ID.setBounds(160, 50, 100, 20);
+            c.add(ID);
+            
+        }
     }
 
 }
