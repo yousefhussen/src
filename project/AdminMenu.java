@@ -19,6 +19,9 @@ public class AdminMenu extends JFrame implements ActionListener {
     JToggleButton ViewB = new JToggleButton("View");
     JToggleButton AddB = new JToggleButton("Add");
     JToggleButton DeleteB = new JToggleButton("Delete");
+     JToggleButton CarB = new JToggleButton("Car");
+    JToggleButton BookingB = new JToggleButton("Booking");
+    JToggleButton CustomerB = new JToggleButton("Customer");
     JToggleButton EditB = new JToggleButton("Edit");
     JToggleButton Test = new JToggleButton("Yest");
     Container c = getContentPane();
@@ -58,7 +61,19 @@ public class AdminMenu extends JFrame implements ActionListener {
         if (e.getSource().equals(ViewB)) {
             
             //default drawings
-            c.removeAll();
+            defaultDrawings();
+            //
+            
+            
+            
+
+        }
+
+    }
+    
+    public void defaultDrawings ()
+    {
+         c.removeAll();
             c.repaint();
             ButtonGroup group = new ButtonGroup();
             ViewB.setBounds(0, 0, 120, 80);
@@ -77,12 +92,17 @@ public class AdminMenu extends JFrame implements ActionListener {
             c.add(AddB);
             c.add(DeleteB);
             c.add(EditB);
-            //
+            ButtonGroup group2 = new ButtonGroup();
+            group2.add(BookingB);
+            group2.add(CarB);
+            group2.add(CustomerB);
+            BookingB.setBounds(120, 0, 190, 40);
+            CarB.setBounds(120+190, 0, 190, 40);
+            CustomerB.setBounds(120+380, 0, 190, 40);
+            c.add(BookingB);
+            c.add(CarB);
+            c.add(CustomerB);
             
-            
-
-        }
-
     }
 
 }
