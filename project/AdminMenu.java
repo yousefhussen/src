@@ -24,6 +24,7 @@ public class AdminMenu extends JFrame implements ActionListener {
     JToggleButton EditB = new JToggleButton("Edit");
     JToggleButton Test = new JToggleButton("Yest");
     JComboBox ID = new JComboBox();
+     JComboBox ID1 = new JComboBox();
     Container c = getContentPane();
 
     public AdminMenu() throws HeadlessException {
@@ -78,7 +79,7 @@ public class AdminMenu extends JFrame implements ActionListener {
             BookingIntialize();
         } else if (e.getSource().equals(CarB)) {
              defaultDrawings();
-          
+             CarIntialize();
 
         } else if (e.getSource().equals(CustomerB)) {
              defaultDrawings();
@@ -91,7 +92,11 @@ public class AdminMenu extends JFrame implements ActionListener {
             BookingDrawings();
 
         }
+        else if(e.getSource().equals(ID1)) {
+            defaultDrawings();
+            CarDrawings();
 
+        }
     }
 
     public void defaultDrawings() {
@@ -126,6 +131,24 @@ public class AdminMenu extends JFrame implements ActionListener {
 
         }
     }
+    
+     public void CarIntialize() {
+         ID1 = new JComboBox();
+        
+        if (ViewB.isSelected()) {
+
+            for (int i = 0; i < Car.getCarList().size(); i++) {
+
+                ID1.addItem(Car.getCarList().get(i).getID());
+            }
+
+            ID1.setBounds(160, 50, 100, 20);
+            ID1.addActionListener(this);
+            c.add(ID1);
+
+        }
+    }
+    
 
     public void BookingDrawings() {
         ID.setBounds(160, 50, 100, 20);
@@ -167,6 +190,42 @@ public class AdminMenu extends JFrame implements ActionListener {
         c.add(BName22);
         c.add(BName1);
         c.add(BName2);
+        c.add(BName111);
+        c.add(BName222);
+        c.add(BName1111);
+        c.add(BName2222);
+        c.add(BName11111);
+        c.add(BName22222);
+        
+    }
+    
+     public void CarDrawings() {
+        ID1.setBounds(160, 50, 100, 20);
+        ID1.addActionListener(this);
+        c.add(ID1);
+        Integer elid = (Integer) ID1.getSelectedItem();
+       
+        JLabel BName111 = new JLabel(Car.getCarList().get(elid).getMake());
+        JLabel BName222 = new JLabel(" Car Brand : ");
+        
+        JLabel BName1111 = new JLabel(Car.getCarList().get(elid).getModel());
+        JLabel BName2222 = new JLabel(" Car Model : ");
+        
+        Integer price = Car.getCarList().get(elid).getPrice();
+        JLabel BName11111 = new JLabel(price.toString());
+        JLabel BName22222 = new JLabel(" Car Price : ");
+        
+      
+        BName111.setBounds(300, 140, 100, 20);
+        BName222.setBounds(180, 140, 120, 20);
+        
+        BName1111.setBounds(300, 160, 100, 20);
+        BName2222.setBounds(180, 160, 120, 20);
+        
+        BName11111.setBounds(300, 180, 100, 20);
+        BName22222.setBounds(180, 180, 120, 20);
+        
+      
         c.add(BName111);
         c.add(BName222);
         c.add(BName1111);
