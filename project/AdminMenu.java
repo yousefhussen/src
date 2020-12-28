@@ -30,7 +30,7 @@ public class AdminMenu extends JFrame implements ActionListener {
     JComboBox ID = new JComboBox();
     JComboBox ID1 = new JComboBox();
     JComboBox ID2 = new JComboBox();
-    JButton deletejoe= new JButton("Delete");
+    JButton deletejoe = new JButton("Delete");
     Container c = getContentPane();
     private BufferedImage image;
 
@@ -108,6 +108,16 @@ public class AdminMenu extends JFrame implements ActionListener {
 
         }
 
+        if (e.getSource().equals(deletejoe)) {
+            if (BookingB.isSelected()) {
+                Booking.deleteBooking((int)ID.getSelectedItem());
+                defaultDrawings();
+                BookingIntialize();
+                
+                
+            }
+        }
+
     }
 
     public void defaultDrawings() {
@@ -139,7 +149,7 @@ public class AdminMenu extends JFrame implements ActionListener {
             ID.addActionListener(this);
             c.add(ID);
 
-        }else   if (DeleteB.isSelected()) {
+        } else if (DeleteB.isSelected()) {
 
             for (int i = 0; i < Booking.getBooking_List().size(); i++) {
 
@@ -148,8 +158,10 @@ public class AdminMenu extends JFrame implements ActionListener {
 
             ID.setBounds(160, 50, 100, 20);
             ID.addActionListener(this);
+            deletejoe.setBounds(200, 250, 100, 20);
+            deletejoe.addActionListener(this);
+            c.add(deletejoe);
             c.add(ID);
-            
 
         }
     }
@@ -234,6 +246,11 @@ public class AdminMenu extends JFrame implements ActionListener {
         c.add(BName2222);
         c.add(BName11111);
         c.add(BName22222);
+        if (DeleteB.isSelected()) {
+            deletejoe.setBounds(200, 250, 100, 20);
+            deletejoe.addActionListener(this);
+            c.add(deletejoe);
+        }
 
     }
 
