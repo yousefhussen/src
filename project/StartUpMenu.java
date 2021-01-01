@@ -3,6 +3,7 @@ package project;
 import java.util.Scanner;
 import java.awt.*;
 import java.awt.event.*;
+import static java.lang.Integer.parseInt;
 import javax.swing.*;
 
 public class StartUpMenu extends JFrame implements ActionListener {
@@ -14,12 +15,12 @@ public class StartUpMenu extends JFrame implements ActionListener {
     private JLabel CustmoerOrAdmin;
     private JTextField tf1;
     private JLabel NA;
-    private JTextField NameAdmin;
-    private JLabel PA;
+    private JTextField NameAdmin, DG;
+    private JLabel PA, AG;
     private JPasswordField PassAdmin;
 
 //    private JTextField tf2;
-    private JButton b1, b2, b3;
+    private JButton b1, b2, b3, b4, b5;
 
     public StartUpMenu(String adminName, String Password) {
 
@@ -35,6 +36,7 @@ public class StartUpMenu extends JFrame implements ActionListener {
 //        setLayout(new FlowLayout(FlowLayout.CENTER , 100 , 250));
         b1 = new JButton("Admin");
         b2 = new JButton("Customer");
+
         b1.setBounds(170, 260 / 2, 100, 40);
         b2.setBounds(290, 260 / 2, 100, 40);
         CustmoerOrAdmin = new JLabel("Are you a user or a Admin");
@@ -45,6 +47,7 @@ public class StartUpMenu extends JFrame implements ActionListener {
         c.add(b1);
         c.add(b2);
         b1.addActionListener(this);
+        b2.addActionListener(this);
         setVisible(true);
 
     }
@@ -291,11 +294,39 @@ public class StartUpMenu extends JFrame implements ActionListener {
             b.setLayout(null);
             setTitle("Log In Admin");
             b3 = new JButton("Sign In");
+
             NA = new JLabel("username: ");
             PA = new JLabel("password: ");
             PassAdmin = new JPasswordField();
             NameAdmin = new JTextField();
+            NA.setBounds(200, 50, 100, 100);
+            PA.setBounds(200, 100, 100, 100);
+            NameAdmin.setBounds(280, 90, 90, 25);
+            PassAdmin.setBounds(280, 140, 90, 25);
+            b3.setBounds(225, 200, 100, 40);
+            b3.addActionListener(this);
 
+            b.add(NA);
+            b.add(NameAdmin);
+            b.add(PA);
+            b.add(PassAdmin);
+            b.add(b3);
+
+        } else if (e.getSource().equals(b2)) {
+
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            Container b = getContentPane();
+            b.setLayout(null);
+            setTitle("Log In Customer");
+            b3 = new JButton("Sign In");
+            b4 = new JButton("Sign Up");
+            NA = new JLabel("username: ");
+            PA = new JLabel("password: ");
+            PassAdmin = new JPasswordField();
+            NameAdmin = new JTextField();
+            b4.setBounds(225, 250, 100, 40);
+            b4.addActionListener(this);
             NA.setBounds(200, 50, 100, 100);
             PA.setBounds(200, 100, 100, 100);
             NameAdmin.setBounds(280, 90, 90, 25);
@@ -307,26 +338,73 @@ public class StartUpMenu extends JFrame implements ActionListener {
             b.add(PA);
             b.add(PassAdmin);
             b.add(b3);
-
-        } else if (e.getSource().equals(b2)) {
+            b.add(b4);
 
         } else if (e.getSource().equals(b3)) {
             if (NameAdmin.getText().equals(adminName) && PassAdmin.getText().equals(Password)) {
-            
+
                 getContentPane().removeAll();
                 getContentPane().repaint();
-                
+
                 Container bb = getContentPane();
                 bb.setLayout(null);
                 dispose();
                 AdminMenu Admin = new AdminMenu();
 
-              
             } else {
 
                 JOptionPane.showMessageDialog(null, "Username or Password is Incorrect ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
 
             }
+        } else if (e.getSource().equals(b4)) {
+            getContentPane().removeAll();
+            getContentPane().repaint();
+
+            Container b = getContentPane();
+            b.setLayout(null);
+            setTitle("Sign Up Customer");
+            NA = new JLabel("username: ");
+            PA = new JLabel("password: ");
+            AG = new JLabel("Age: ");
+            b5 = new JButton("Create Account");
+            DG = new JTextField();
+            PassAdmin = new JPasswordField();
+            NameAdmin = new JTextField();
+            NA.setBounds(200, 50, 100, 100);
+            PA.setBounds(200, 100, 100, 100);
+            AG.setBounds(200, 150, 100, 100);
+            DG.setBounds(280, 190, 40, 25);
+            NameAdmin.setBounds(280, 90, 90, 25);
+            PassAdmin.setBounds(280, 140, 90, 25);
+            b3.setBounds(225, 200, 100, 40);
+            b3.addActionListener(this);
+            b5.setBounds(225, 250, 150, 60);
+            b5.addActionListener(this);
+            b.add(NA);
+            b.add(NameAdmin);
+            b.add(PA);
+            b.add(PassAdmin);
+            b.add(AG);
+            b.add(DG);
+            b.add(b5);
+
+        } else if (e.getSource().equals(b5)) {
+            if (DG.getText().equals("") || PassAdmin.getText().equals("") || NameAdmin.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Don't leave a field empty", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
+
+            } else {
+                Integer habd = parseInt(DG.getText());
+                Integer habd2 = parseInt(PassAdmin.getText());
+                Customer newCustomer = new Customer(NameAdmin.getText(), habd, habd2);
+                Customer.addcustomer(newCustomer);
+                JOptionPane.showMessageDialog(null, "Signed successfully,your ID is  "+ newCustomer.getCustomer_ID(), "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
+                dispose();
+                CustomerMenu c3=new CustomerMenu(newCustomer);
+                
+                
+
+            }
+
         }
 
     }
