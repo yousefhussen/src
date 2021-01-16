@@ -10,7 +10,6 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 
-
 public class CustomerMenu extends JFrame implements ActionListener {
     Customer speed;
     JToggleButton ViewB = new JToggleButton("View");
