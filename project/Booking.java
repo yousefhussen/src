@@ -185,13 +185,10 @@ public class Booking implements Serializable {
     }
 
     public static void deleteBooking(int booking_id) {
-<<<<<<< Updated upstream
+
         booking_List.set(booking_id, new Booking(null, null, null, null));
 
-=======
-        booking_List.remove(booking_id);
-        numOfBooking--;
->>>>>>> Stashed changes
+
     }
 
 }

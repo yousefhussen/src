@@ -141,7 +141,7 @@ public class AdminMenu extends JFrame implements ActionListener {
 
         if (e.getSource().equals(deletejoe)) {
             if (BookingB.isSelected()) {
-<<<<<<< Updated upstream
+
                 Booking.deleteBooking((int) ID.getSelectedItem());
                 defaultDrawings();
                 BookingIntialize();
@@ -243,15 +243,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Edited Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
                 }
 
-=======
-                Booking Temp = new Booking("0/0/0", "0/0/0", null, null);
-                
-                Temp.setBooking_id((int)ID.getSelectedItem());
-                Booking.getBooking_List().set(ID.getSelectedIndex(),Temp);
-                defaultDrawings();
-                BookingIntialize();
 
->>>>>>> Stashed changes
             }
         }
 
@@ -286,11 +278,8 @@ public class AdminMenu extends JFrame implements ActionListener {
                     ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
                 }
 
-<<<<<<< Updated upstream
-=======
-                ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
 
->>>>>>> Stashed changes
+
             }
 
             ID.setBounds(160, 50, 100, 20);
@@ -300,12 +289,10 @@ public class AdminMenu extends JFrame implements ActionListener {
         } else if (DeleteB.isSelected()) {
 
             for (int i = 0; i < Booking.getBooking_List().size(); i++) {
-<<<<<<< Updated upstream
+
                 if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
 
-=======
-                if (Booking.getBooking_List().get(i).getBooking_Start()!="0/0/0") {
->>>>>>> Stashed changes
+
                     ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
                 }
             }
@@ -595,7 +582,7 @@ public class AdminMenu extends JFrame implements ActionListener {
     }
 
     public void BookingDrawings() {
-<<<<<<< Updated upstream
+
         if (DeleteB.isSelected() || ViewB.isSelected()) {
             ID.setBounds(160, 50, 100, 20);
 
@@ -744,58 +731,7 @@ public class AdminMenu extends JFrame implements ActionListener {
 
             editjoe.setBounds(200, 250, 100, 20);
             c.add(editjoe);
-=======
-        ID.setBounds(160, 50, 100, 20);
-        ID.addActionListener(this);
-        c.add(ID);
-        Integer elid = (Integer) ID.getSelectedItem();
-        
-        JLabel BName1 = new JLabel(Booking.getBooking_List().get(elid).getBooking_End());
-        JLabel BName2 = new JLabel("Booking End Date : ");
 
-        JLabel BName11 = new JLabel(Booking.getBooking_List().get(elid).getBooking_Start());
-        JLabel BName22 = new JLabel("Booking Start Date : ");
-
-        JLabel BName111 = new JLabel(Booking.getBooking_List().get(elid).getObjCar().getMake());
-        JLabel BName222 = new JLabel("Booking Car Brand : ");
-
-        JLabel BName1111 = new JLabel(Booking.getBooking_List().get(elid).getObjCar().getModel());
-        JLabel BName2222 = new JLabel("Booking Car Model : ");
-
-        Integer price = Booking.getBooking_List().get(elid).getObjCar().getPrice();
-        JLabel BName11111 = new JLabel(price.toString());
-        JLabel BName22222 = new JLabel("Booking Car Price : ");
-
-        BName1.setBounds(300, 100, 100, 20);
-        BName2.setBounds(180, 100, 120, 20);
-
-        BName11.setBounds(300, 120, 100, 20);
-        BName22.setBounds(180, 120, 120, 20);
-
-        BName111.setBounds(300, 140, 100, 20);
-        BName222.setBounds(180, 140, 120, 20);
-
-        BName1111.setBounds(300, 160, 100, 20);
-        BName2222.setBounds(180, 160, 120, 20);
-
-        BName11111.setBounds(300, 180, 100, 20);
-        BName22222.setBounds(180, 180, 120, 20);
-
-        c.add(BName11);
-        c.add(BName22);
-        c.add(BName1);
-        c.add(BName2);
-        c.add(BName111);
-        c.add(BName222);
-        c.add(BName1111);
-        c.add(BName2222);
-        c.add(BName11111);
-        c.add(BName22222);
-        if (DeleteB.isSelected()) {
-            deletejoe.setBounds(200, 250, 100, 20);
-            deletejoe.addActionListener(this);
-            c.add(deletejoe);
->>>>>>> Stashed changes
         }
 
     }

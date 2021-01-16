@@ -25,15 +25,11 @@ public class Project {
       Booking b1=new Booking("10/5/2019","10/6/2019",c1,c3); 
       Booking.addBooking(b1);
       Booking b2=new Booking("1/1/2020","5/5/2020",c2,c4);
-<<<<<<< Updated upstream
+
       Booking.addBooking(b2);  
       //CustomerMenu c77=new CustomerMenu(c3);
       AdminMenu s1 = new AdminMenu();
-=======
-      Booking.addBooking(b2); 
-      Booking b3=new Booking("1/01/2020","50/5/2020",c2,c4);
-      Booking.addBooking(b3); 
->>>>>>> Stashed changes
+
       
       
         

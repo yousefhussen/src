@@ -10,26 +10,32 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 
+
 public class CustomerMenu extends JFrame implements ActionListener {
+
     Customer speed;
     JToggleButton ViewB = new JToggleButton("View");
     JToggleButton AddB = new JToggleButton("Add");
     JToggleButton DeleteB = new JToggleButton("Delete");
-   
+
     JToggleButton BookingB = new JToggleButton("Booking");
-  
+
     JToggleButton EditB = new JToggleButton("Edit");
     JToggleButton Test = new JToggleButton("Yest");
     JComboBox ID = new JComboBox();
-   
+
     JButton deletejoe = new JButton("Cancel");
+    JButton addButton = new JButton("Add");
+    JTextField tf1, tf2;
+    JLabel lb1, lb2, lb3, make, model, price, make1, model1, price1;
+    JComboBox addComboBoxCar;
     Container c = getContentPane();
     private BufferedImage image;
 
     public CustomerMenu(Customer speed2) throws HeadlessException {
 
         c.setLayout(null);
-        speed=speed2;
+        speed = speed2;
         setSize(700, 360);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -54,11 +60,11 @@ public class CustomerMenu extends JFrame implements ActionListener {
         c.add(EditB);
         ButtonGroup group2 = new ButtonGroup();
         group2.add(BookingB);
-      
+
         BookingB.setBounds(120, 0, 565, 40);
-      
+
         BookingB.addActionListener(this);
-        
+
         setVisible(true);
 
     }
@@ -73,25 +79,31 @@ public class CustomerMenu extends JFrame implements ActionListener {
         } else if (e.getSource().equals(BookingB)) {
             defaultDrawings();
             BookingIntialize();
-     
-
-
         }
 
         if (e.getSource().equals(ID)) {
             defaultDrawings();
             BookingDrawings();
 
-        
+        }
+        if (e.getSource().equals(addComboBoxCar)) {
+            defaultDrawings();
+            Integer elid2 = (Integer) addComboBoxCar.getSelectedItem();
+            model1 = new JLabel(Car.getCarList().get(elid2).getModel());
+            model = new JLabel("Model: ");
+            make1 = new JLabel(Car.getCarList().get(elid2).getMake());
+            make = new JLabel("Make: ");
+            Integer price2 = Car.getCarList().get(elid2).getPrice();
+            price1 = new JLabel(price2.toString());
+            price = new JLabel("Price: ");
+            BookingIntialize();
         }
 
         if (e.getSource().equals(deletejoe)) {
             if (BookingB.isSelected()) {
-                Booking.deleteBooking((int)ID.getSelectedItem());
+                Booking.deleteBooking((int) ID.getSelectedItem());
                 defaultDrawings();
                 BookingIntialize();
-                
-                
             }
         }
 
@@ -105,7 +117,7 @@ public class CustomerMenu extends JFrame implements ActionListener {
         c.add(DeleteB);
         c.add(EditB);
         c.add(BookingB);
-       
+
         c.revalidate();
         c.repaint();
 
@@ -113,14 +125,12 @@ public class CustomerMenu extends JFrame implements ActionListener {
 
     public void BookingIntialize() {
         ID = new JComboBox();
-        
 
         if (ViewB.isSelected()) {
 
             for (int i = 0; i < Booking.getBooking_List().size(); i++) {
-                if(speed==Booking.getBooking_List().get(i).getObjCustomer())
-                {
-                 ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
+                if (speed == Booking.getBooking_List().get(i).getObjCustomer()) {
+                    ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
                 }
             }
 
@@ -142,12 +152,47 @@ public class CustomerMenu extends JFrame implements ActionListener {
             c.add(deletejoe);
             c.add(ID);
 
+        } else if (AddB.isSelected()) {
+
+            tf1 = new JTextField();
+            tf2 = new JTextField();
+            lb1 = new JLabel("Start Date: ");
+            lb2 = new JLabel(" End Date: ");
+            lb3 = new JLabel("Choose Car: ");
+            addComboBoxCar = new JComboBox();
+
+            for (int i = 0; i < Car.getCarList().size(); i++) {
+                addComboBoxCar.addItem(Car.getCarList().get(i).getID());
+            }
+
+            addButton.setBounds(225, 200, 100, 40);
+
+            addComboBoxCar.setBounds(300, 120, 100, 20);
+            lb1.setBounds(180, 80, 120, 20);
+            lb2.setBounds(180, 100, 120, 20);
+
+            tf1.setBounds(300, 100, 100, 20);
+            tf2.setBounds(300, 80, 100, 20);
+
+            lb3.setBounds(180, 120, 100, 20);
+
+            model.setBounds(180, 140, 100, 20);
+            model1.setBounds(300, 200, 100, 20);
+
+            c.add(tf1);
+            c.add(tf2);
+            c.add(lb1);
+            c.add(lb2);
+            c.add(lb3);
+            c.add(addComboBoxCar);
+            c.add(addButton);
+            c.add(model1);
+            c.add(model);
+        } else if (addButton.isSelected()) {
+
         }
+
     }
-
-   
-
-   
 
     public void BookingDrawings() {
         ID.setBounds(160, 50, 100, 20);
@@ -203,9 +248,6 @@ public class CustomerMenu extends JFrame implements ActionListener {
 
     }
 
-    
-
-    
 //     public void paintComponent(Graphics J) throws IOException
 //     {
 //         super.paintComponents(J);
