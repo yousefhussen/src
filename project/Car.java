@@ -163,8 +163,8 @@ public class Car implements Serializable {
     }
 
     public static void deleteCar(int id) {
-        carList.remove(id);
-        numOfObjects--;
+        carList.set(id, new Car(null,null,-1));
+       
     }
 
 }

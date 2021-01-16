@@ -153,8 +153,7 @@ public class Customer implements Serializable {
     }
 
     public static void deleteCustomer(int customer_id) {
-        customer_list.remove(customer_id);
-        numOfObjects--;
+        customer_list.set(customer_id, new Customer(null,-1,-1));
     }
 
 }

@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 public class ReadAndWrite{
 
@@ -76,7 +75,7 @@ public class ReadAndWrite{
 
         ObjectInputStream is3 = new ObjectInputStream(new FileInputStream("Customer.bin"));
 
-        objCustomer.getCustomer_list().clear();
+        Customer.getCustomer_list().clear();
 
         try {
             while (true) {

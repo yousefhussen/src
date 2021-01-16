@@ -20,11 +20,11 @@ public class Booking implements Serializable {
 
     public Booking(String booking_Start, String booking_End, Car objCar, Customer objCustomer) {
 
-        
         this.booking_Start = booking_Start;
         this.booking_End = booking_End;
         this.objCar = objCar;
         this.objCustomer = objCustomer;
+
         this.booking_id = numOfBooking;
 
     }
@@ -147,8 +147,9 @@ public class Booking implements Serializable {
         }
 
     }
+
     // coco
-       public static void editBookingListUser(int id) {
+    public static void editBookingListUser(int id) {
 
         Booking bookingTemp = booking_List.get(id);
         Car settercar = Car.getCarList().get(id);
@@ -184,9 +185,8 @@ public class Booking implements Serializable {
     }
 
     public static void deleteBooking(int booking_id) {
-        booking_List.set(booking_id,   new Booking());
-       
-        numOfBooking--;
+        booking_List.set(booking_id, new Booking(null, null, null, null));
+
     }
 
 }
