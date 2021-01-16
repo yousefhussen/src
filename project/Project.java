@@ -28,12 +28,13 @@ public class Project {
 
       Booking.addBooking(b2);  
       //CustomerMenu c77=new CustomerMenu(c3);
-      AdminMenu s1 = new AdminMenu();
+     // AdminMenu s1 = new AdminMenu();
 
       
       
-        
-   StartUpMenu start = new StartUpMenu("Basha","7");
+        PayMethod q1 = new PayMethod(b1);
+  // StartUpMenu start = new StartUpMenu("Basha","7");
+   
    
    w1.Write();
 
