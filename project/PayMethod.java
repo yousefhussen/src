@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
@@ -27,7 +28,13 @@ public class PayMethod extends JFrame implements ActionListener {
     JButton Cash = new JButton("Cash");
     JButton Credit = new JButton("Credit");
     JButton floos = new JButton("Confirm");
-
+    JButton pay=new JButton("Pay");
+    JFormattedTextField field = new JFormattedTextField();
+    JFormattedTextField field1 = new JFormattedTextField();
+    JFormattedTextField field2 = new JFormattedTextField();
+    JFormattedTextField field3 = new JFormattedTextField();
+    JTextField field0 = new JTextField();
+            
     Booking objBooking;
     Container c = getContentPane();
 
@@ -126,23 +133,21 @@ public class PayMethod extends JFrame implements ActionListener {
             c.revalidate();
             c.repaint();
             c.setLayout(null);
-            setSize(550, 250);
+            setSize(600, 250);
             setLocationRelativeTo(null);
 
             JLabel BName2 = new JLabel("Card Number : ");
 
-            JLabel BName22 = new JLabel("Card Name : ");
+            JLabel BName22 = new JLabel("Card Name     : ");
 
-            JLabel BName222 = new JLabel("Expiry Month : ");
+            JLabel BName222 = new JLabel("Expiry Month  : ");
 
             JLabel BName2222 = new JLabel("Expiry Year: ");
+            JLabel BName22222 = new JLabel("cvc/cvv: ");
+            
+            
 
-            JTextField EorAParameter1 = new JTextField();
-            JTextField EorAParameter2 = new JTextField();
-            JTextField EorAParameter3 = new JTextField();
-            JTextField EorAParameter4 = new JTextField();
-
-           
+            
 
             MaskFormatter mask = null;
             try {
@@ -151,19 +156,83 @@ public class PayMethod extends JFrame implements ActionListener {
             } catch (ParseException ee) {
                 ee.printStackTrace();
             }
+            field=new JFormattedTextField(mask);
 
-            JFormattedTextField field = new JFormattedTextField(mask);
+           
+            
+             MaskFormatter mask1 = null;
+            try {
+                mask1 = new MaskFormatter("##");
+                mask1.setPlaceholderCharacter(' ');
+            } catch (ParseException ee) {
+                ee.printStackTrace();
+            }
+             field1=new JFormattedTextField(mask1);
+
+           
+             field2=new JFormattedTextField(mask1);
+             MaskFormatter mask2 = null;
+            try {
+                mask2 = new MaskFormatter("###");
+                mask2.setPlaceholderCharacter(' ');
+            } catch (ParseException ee) {
+                ee.printStackTrace();
+            }
+             field3=new JFormattedTextField(mask2);
+              
+            
 
             field.setBounds(300, 50, 150, 20);
             BName2.setBounds(180, 50, 120, 20);
-            EorAParameter2.setBounds(300, 70, 100, 20);
+            field0.setBounds(300, 70, 100, 20);
             BName22.setBounds(180, 70, 120, 20);
+            field1.setBounds(300, 90, 30, 20);
+            BName222.setBounds(180, 90, 150, 20);
+            field2.setBounds(410, 90, 30, 20);
+            BName2222.setBounds(332, 90, 150, 20);
+            field3.setBounds(510, 90, 30, 20);
+            BName22222.setBounds(450, 90, 150, 20);
+            pay.setBounds(300,130,150,50);
+            
 
             c.add(field);
             c.add(BName2);
-            c.add(EorAParameter2);
+            c.add(field0);
             c.add(BName22);
+            c.add(field1);
+            c.add(BName222);
+            c.add(field2);
+            c.add(BName2222);
+            c.add(field3);
+            c.add(BName22222);
+            c.add(pay);
+            pay.addActionListener(this);
+            
 
+        }
+        else if(e.getSource().equals(pay))
+        {
+            if(field.getText().charAt(0)==' '||field.getText().charAt(field.getText().length()-1)==' ')
+            {
+                JOptionPane.showMessageDialog(null, "Don't Leave any field empty !", "a7a", JOptionPane.PLAIN_MESSAGE);
+            }
+            else if(field1.getText().charAt(0)==' '||field1.getText().charAt(field1.getText().length()-1)==' ')
+            {
+                JOptionPane.showMessageDialog(null, "Don't Leave any field empty !", "a7a", JOptionPane.PLAIN_MESSAGE);
+            }
+            else if(field2.getText().charAt(0)==' '||field2.getText().charAt(field2.getText().length()-1)==' ')
+            {
+                JOptionPane.showMessageDialog(null, "Don't Leave any field empty !", "a7a", JOptionPane.PLAIN_MESSAGE);
+            }
+            else if(field3.getText().charAt(0)==' '||field3.getText().charAt(field3.getText().length()-1)==' ')
+            {
+                JOptionPane.showMessageDialog(null, "Don't Leave any field empty !", "a7a", JOptionPane.PLAIN_MESSAGE);
+            }
+            else
+            {
+             JOptionPane.showMessageDialog(null, "Success !", "gad3", JOptionPane.PLAIN_MESSAGE);
+             
+            }
         }
     }
 
