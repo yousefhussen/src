@@ -78,7 +78,9 @@ public class Booking implements Serializable {
     }
 
     public static void addBooking(Booking obj) {
-
+        if (Car.getCarList().contains(obj.getObjCar())) {
+            Car.deleteCar(obj.getObjCar().getID());
+        }
         booking_List.add(obj);
         numOfBooking++;
     }
@@ -187,7 +189,6 @@ public class Booking implements Serializable {
     public static void deleteBooking(int booking_id) {
 
         booking_List.set(booking_id, new Booking(null, null, null, null));
-
 
     }
 

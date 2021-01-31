@@ -18,14 +18,19 @@ public class StartUpMenu extends JFrame implements ActionListener {
     private JTextField NameAdmin, DG;
     private JLabel PA, AG;
     private JPasswordField PassAdmin;
+    private JLabel IDLogin;  
+    private JTextField IDLoginEnter ;
+    private ReadAndWrite file;
+     
 
 //    private JTextField tf2;
-    private JButton b1, b2, b3, b4, b5;
+    private JButton b1, b2, b3, b4, b5 , b6;
 
-    public StartUpMenu(String adminName, String Password) {
+    public StartUpMenu(String adminName, String Password ,ReadAndWrite file) {
 
         this.adminName = adminName;
         this.Password = Password;
+         this.file =file;
         Container c = getContentPane();
         c.setLayout(null);
 
@@ -55,234 +60,6 @@ public class StartUpMenu extends JFrame implements ActionListener {
     StartUpMenu() {
 
     }
-
-    public void LogIn() {
-
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("Customer Or Admin ? (c/a)");
-        String cora = input.next();
-        if (cora.equalsIgnoreCase("c")) {
-            UserLogin();
-
-        } else if (cora.equalsIgnoreCase("a")) {
-
-            System.out.println("Enter the Admin name, please");
-            String x = input.next();
-            if (x.equals(adminName)) {
-                System.out.println("Enter the password, please");
-                String z = input.next();
-                if (z.equals(Password)) {
-                    System.out.println("edit or delete or add or view");
-                    z = input.next();
-                    if (z.equals("edit")) {
-                        String repeat = "yes";
-                        while (repeat.equalsIgnoreCase("yes")) {
-                            Booking.viewBookingList();
-                            System.out.println("Change Cars/Customers/Bookings");
-                            String xx = input.next();
-
-                            if (xx.equalsIgnoreCase("Car")) {
-
-                                Car.viewCarlist();
-                                System.out.println("===========================================");
-                                //   System.out.println("The list of Cars is from 0 to " + (Car.getNumOfObjects() - 1));
-                                System.out.println("Write down the id of the car that you would like to change");
-                                int h = input.nextInt();
-
-                                Car.editCar(h);
-                                Car.viewCarlist();
-
-                            } else if (xx.equalsIgnoreCase("booking")) {
-                                System.out.println("===========================================");
-                                System.out.println("The list of bookings is from 0 to " + (Booking.getNumOfBooking() - 1));
-                                System.out.println("Write down the id of the booking that you would like to change");
-                                int h = input.nextInt();
-                                Booking.editBookingList(h);
-                            } else if (xx.equalsIgnoreCase("Customer")) {
-                                Customer.viewMemberList();
-                                System.out.println("===========================================");
-                                System.out.println("The list of Customers is from 0 to " + (Customer.getNumOfObjects() - 1));
-                                System.out.println("Write down the id of the customer that you would like to change");
-                                int h = input.nextInt();
-                                Customer.editCustomer(h);
-                            }
-
-                            System.out.println("would you like to change anything else? (yes/no)");
-                            repeat = input.next();
-                        }
-
-                    } else if (z.equalsIgnoreCase("add")) {
-                        System.out.println("add booking/car/customer");
-                        String xx = input.next();
-                        if (xx.equalsIgnoreCase("booking")) {
-                            System.out.println("Enter the start date of rent contract");
-
-                            String booking_Start = input.next();
-                            System.out.println("Enter the end date of rent contract");
-                            String booking_End = input.next();
-                            Car.viewCarlist();
-                            System.out.println("Enter the id of the wanted car");
-                            Car willbeaddedCar = Car.getCarList().get(input.nextInt());
-                            Customer.viewMemberList();
-                            System.out.println("Enter the id of the Customer");
-                            Customer willbeaddedCustomer = Customer.getCustomer_list().get(input.nextInt());
-                            Booking bb = new Booking(booking_Start, booking_End, willbeaddedCar, willbeaddedCustomer);
-                            Booking.addBooking(bb);
-
-                        } else if (xx.equalsIgnoreCase("car")) {
-                            System.out.println("Enter the Model of the car");
-                            String model = input.next();
-                            System.out.println("enter the make of the car");
-                            String make = input.next();
-                            System.out.println("enter the price of the car");
-                            int price = input.nextInt();
-                            Car bb = new Car(model, make, price);
-                            Car.addCar(bb);
-                        } else if (xx.equalsIgnoreCase("Customer")) {
-                            System.out.println("Enter the name of the customer");
-                            String name = input.next();
-                            System.out.println("enter the password of the customer");
-                            int password = input.nextInt();
-                            System.out.println("enter the age of the Customer");
-                            int age = input.nextInt();
-                            Customer bb = new Customer(name, age, password);
-                            Customer.addcustomer(bb);
-                        }
-                    } else if (z.equalsIgnoreCase("delete")) {
-                        System.out.println("delete booking/car/customer");
-                        String xx = input.next();
-                        if (xx.equalsIgnoreCase("booking")) {
-                            System.out.println("enter the id of the booking you want to delete");
-                            int xy = input.nextInt();
-                            Booking.getBooking_List().remove(xy);
-
-                        } else if (xx.equalsIgnoreCase("car")) {
-                            System.out.println("enter the id of the Car you want to delete");
-                            int xy = input.nextInt();
-                            System.out.println("Deleting.....");
-                            Car.getCarList().remove(xy);
-                            System.out.println("Deleted succefully");
-
-                        } else if (xx.equalsIgnoreCase("Customer")) {
-                            System.out.println("enter the id of the Customer you want to delete");
-                            int xy = input.nextInt();
-                            Customer.getCustomer_list().remove(xy);
-                            System.out.println("Deleted succefully");
-
-                        }
-                    } else if (z.equalsIgnoreCase("view")) {
-                        System.out.println("view list of ... booking/car/customer");
-                        String xx = input.next();
-                        if (xx.equalsIgnoreCase("booking")) {
-
-                            Booking.viewBookingList();
-
-                        } else if (xx.equalsIgnoreCase("car")) {
-                            Car.viewCarlist();
-
-                        } else if (xx.equalsIgnoreCase("Customer")) {
-                            Customer.viewMemberList();
-
-                        }
-                    }
-                } else {
-                    System.out.println("Password is incorrrect, please try again");
-                    LogIn();
-                }
-            } else {
-                System.out.println("Username is incorrect, Please try again");
-                LogIn();
-            }
-
-        }
-
-    }
-
-    private void UserLogin() {
-        System.out.println("edit or delete or add");
-        Scanner input = new Scanner(System.in);
-        String eda = input.next();
-        if (eda.equalsIgnoreCase("edit")) {
-            System.out.println("===========================================");
-            System.out.println("Write down the id of the booking that you would like to change");
-            int h = input.nextInt();
-            System.out.println("Checking if you are the user for Booking with id:  " + h);
-            System.out.println("Enter the user name, please");
-            String x = input.next();
-            if (x.equals(Booking.getBooking_List().get(h).getObjCustomer().getName())) {
-                System.out.println("Enter you password , please ");
-                int z = input.nextInt();
-                if (z == Booking.getBooking_List().get(h).getObjCustomer().getpassword()) {
-                    Booking.editBookingListUser(h);
-                } else {
-                    System.out.println("Password is incorrrect, please try again");
-                    UserLogin();
-                }
-            } else {
-                System.out.println("Username is incorrect, Please try again");
-                UserLogin();
-            }
-        } else if (eda.equalsIgnoreCase("add")) {
-            System.out.println("is It your First time Here? (yes/no)");
-            if (input.next().equalsIgnoreCase("yes")) {
-                System.out.println("Enter the name of the customer");
-                String name = input.next();
-                System.out.println("enter the password of the customer");
-                int password = input.nextInt();
-                System.out.println("enter the age of the customer");
-                int age = input.nextInt();
-                Customer bb = new Customer(name, age, password);
-                Customer.addcustomer(bb);
-                System.out.println("Your Id Is " + bb.getCustomer_ID() + " PLease remember it");
-
-            }
-
-            System.out.println("Enter the start date of rent contract");
-            String booking_Start = input.next();
-            System.out.println("Enter the end date of rent contract");
-            String booking_End = input.next();
-            Car.viewCarlist();
-            System.out.println("Enter the id of the wanted car");
-            Car willbeaddedCar = Car.getCarList().get(input.nextInt());
-
-            System.out.println("Enter your id ");
-            Customer willbeaddedCustomer = Customer.getCustomer_list().get(input.nextInt());
-            System.out.println("Enter Your Password , " + willbeaddedCustomer.getName());
-            if (input.nextInt() == (willbeaddedCustomer.getpassword())) {
-                System.out.println("Logged In Succesfully");
-                Booking bb = new Booking(booking_Start, booking_End, willbeaddedCar, willbeaddedCustomer);
-                Booking.addBooking(bb);
-            } else {
-                System.out.println("Password incorrect Exiting...");
-            }
-
-        } else if (eda.equalsIgnoreCase("delete")) {
-            System.out.println("===========================================");
-            System.out.println("Write down the id of the booking that you would like to delete");
-            int h = input.nextInt();
-            System.out.println("Checking if you are the user for Booking with id:  " + h);
-            System.out.println("Enter the user name, please");
-            String x = input.next();
-            if (x.equals(Booking.getBooking_List().get(h).getObjCustomer().getName())) {
-                System.out.println("Enter you password , please ");
-                int z = input.nextInt();
-                if (z == Booking.getBooking_List().get(h).getObjCustomer().getpassword()) {
-                    System.out.println("Deleting.....");
-                    Booking.getBooking_List().remove(h);
-                    System.out.println("Deleted succefully");
-                } else {
-                    System.out.println("Password is incorrrect, please try again");
-                    UserLogin();
-                }
-            } else {
-                System.out.println("Username is incorrect, Please try again");
-                UserLogin();
-            }
-
-        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(b1)) {
@@ -293,7 +70,7 @@ public class StartUpMenu extends JFrame implements ActionListener {
             Container b = getContentPane();
             b.setLayout(null);
             setTitle("Log In Admin");
-            b3 = new JButton("Sign In");
+            b6 = new JButton("Sign In");
 
             NA = new JLabel("username: ");
             PA = new JLabel("password: ");
@@ -303,14 +80,14 @@ public class StartUpMenu extends JFrame implements ActionListener {
             PA.setBounds(200, 100, 100, 100);
             NameAdmin.setBounds(280, 90, 90, 25);
             PassAdmin.setBounds(280, 140, 90, 25);
-            b3.setBounds(225, 200, 100, 40);
-            b3.addActionListener(this);
+            b6.setBounds(225, 200, 100, 40);
+            b6.addActionListener(this);
 
             b.add(NA);
             b.add(NameAdmin);
             b.add(PA);
             b.add(PassAdmin);
-            b.add(b3);
+            b.add(b6);
 
         } else if (e.getSource().equals(b2)) {
 
@@ -321,16 +98,21 @@ public class StartUpMenu extends JFrame implements ActionListener {
             setTitle("Log In Customer");
             b3 = new JButton("Sign In");
             b4 = new JButton("Sign Up");
-            NA = new JLabel("username: ");
-            PA = new JLabel("password: ");
+            JLabel IDLogin = new JLabel("ID: ");
+            NA = new JLabel("Username: ");
+            PA = new JLabel("Password: ");
             PassAdmin = new JPasswordField();
             NameAdmin = new JTextField();
+            IDLoginEnter = new JTextField();
             b4.setBounds(225, 250, 100, 40);
             b4.addActionListener(this);
             NA.setBounds(200, 50, 100, 100);
             PA.setBounds(200, 100, 100, 100);
+           
             NameAdmin.setBounds(280, 90, 90, 25);
-            PassAdmin.setBounds(280, 140, 90, 25);
+            PassAdmin.setBounds(280, 140, 90, 25); 
+            IDLogin.setBounds(200, 10, 100, 100);
+            IDLoginEnter.setBounds(280, 50, 90, 25);
             b3.setBounds(225, 200, 100, 40);
             b3.addActionListener(this);
             b.add(NA);
@@ -339,23 +121,41 @@ public class StartUpMenu extends JFrame implements ActionListener {
             b.add(PassAdmin);
             b.add(b3);
             b.add(b4);
+            b.add(IDLogin);
+            b.add(IDLoginEnter);
 
         } else if (e.getSource().equals(b3)) {
-            if (NameAdmin.getText().equals(adminName) && PassAdmin.getText().equals(Password)) {
-
+            try
+            {
+                int SH= Integer.parseInt(IDLoginEnter.getText());
+                
+                Customer temp = Customer.getCustomer_list().get(SH); 
+                if (temp.getName().equals(NameAdmin.getText())&&temp.getpassword()==(Integer.parseInt(PassAdmin.getText())))
+            {
+              
+                  
                 getContentPane().removeAll();
                 getContentPane().repaint();
 
                 Container bb = getContentPane();
                 bb.setLayout(null);
                 dispose();
-                AdminMenu Admin = new AdminMenu();
+                CustomerMenu c77=new CustomerMenu(temp ,  this.file);
+               
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "Username or Password is Incorrect ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "username or password wrong ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
 
             }
+            }
+            catch(Exception ee){
+                    
+                     JOptionPane.showMessageDialog(null, "A customer with this ID Doesn't exist ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
+            }
+            
+            
+          
         } else if (e.getSource().equals(b4)) {
             getContentPane().removeAll();
             getContentPane().repaint();
@@ -397,12 +197,22 @@ public class StartUpMenu extends JFrame implements ActionListener {
                 Integer habd2 = parseInt(PassAdmin.getText());
                 Customer newCustomer = new Customer(NameAdmin.getText(), habd, habd2);
                 Customer.addcustomer(newCustomer);
-                JOptionPane.showMessageDialog(null, "Signed successfully,your ID is  "+ newCustomer.getCustomer_ID(), "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Signed successfully,your ID is  " + newCustomer.getCustomer_ID(), "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
                 dispose();
-                CustomerMenu c3=new CustomerMenu(newCustomer);
-                
-                
+                CustomerMenu c3 = new CustomerMenu(newCustomer , this.file);
 
+            }
+
+        }
+        else if (e.getSource().equals(b6)) {
+            if (PassAdmin.getText().equals(Password)&& NameAdmin.getText().equals(adminName)) {
+                
+               
+                dispose();
+                 AdminMenu s1 = new AdminMenu(this.file);
+
+            }else{
+                 JOptionPane.showMessageDialog(null, "username or password wrong ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
             }
 
         }

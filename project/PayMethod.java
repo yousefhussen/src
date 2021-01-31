@@ -11,8 +11,6 @@ import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.Format;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -21,28 +19,29 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
-import javax.swing.text.NumberFormatter;
 
 public class PayMethod extends JFrame implements ActionListener {
 
     JButton Cash = new JButton("Cash");
     JButton Credit = new JButton("Credit");
     JButton floos = new JButton("Confirm");
-    JButton pay=new JButton("Pay");
+    JButton pay = new JButton("Pay");
     JFormattedTextField field = new JFormattedTextField();
     JFormattedTextField field1 = new JFormattedTextField();
     JFormattedTextField field2 = new JFormattedTextField();
     JFormattedTextField field3 = new JFormattedTextField();
     JTextField field0 = new JTextField();
-            
+
     Booking objBooking;
+
     Container c = getContentPane();
 
     public PayMethod(Booking tmpbook) throws HeadlessException {
         this.objBooking = tmpbook;
+
         c.setLayout(null);
         setSize(600, 250);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("PaymentMethod");
         JLabel WhichMethod = new JLabel("Which Method will be used to pay  : ");
@@ -127,6 +126,8 @@ public class PayMethod extends JFrame implements ActionListener {
             c.add(BName22222);
             c.add(BNameS);
             c.add(BNameSS);
+            Booking.addBooking(objBooking);
+            JOptionPane.showMessageDialog(null, "Added Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
 
         } else if (e.getSource().equals(Credit)) {
             c.removeAll();
@@ -144,10 +145,6 @@ public class PayMethod extends JFrame implements ActionListener {
 
             JLabel BName2222 = new JLabel("Expiry Year: ");
             JLabel BName22222 = new JLabel("cvc/cvv: ");
-            
-            
-
-            
 
             MaskFormatter mask = null;
             try {
@@ -156,31 +153,26 @@ public class PayMethod extends JFrame implements ActionListener {
             } catch (ParseException ee) {
                 ee.printStackTrace();
             }
-            field=new JFormattedTextField(mask);
+            field = new JFormattedTextField(mask);
 
-           
-            
-             MaskFormatter mask1 = null;
+            MaskFormatter mask1 = null;
             try {
                 mask1 = new MaskFormatter("##");
                 mask1.setPlaceholderCharacter(' ');
             } catch (ParseException ee) {
                 ee.printStackTrace();
             }
-             field1=new JFormattedTextField(mask1);
+            field1 = new JFormattedTextField(mask1);
 
-           
-             field2=new JFormattedTextField(mask1);
-             MaskFormatter mask2 = null;
+            field2 = new JFormattedTextField(mask1);
+            MaskFormatter mask2 = null;
             try {
                 mask2 = new MaskFormatter("###");
                 mask2.setPlaceholderCharacter(' ');
             } catch (ParseException ee) {
                 ee.printStackTrace();
             }
-             field3=new JFormattedTextField(mask2);
-              
-            
+            field3 = new JFormattedTextField(mask2);
 
             field.setBounds(300, 50, 150, 20);
             BName2.setBounds(180, 50, 120, 20);
@@ -192,8 +184,7 @@ public class PayMethod extends JFrame implements ActionListener {
             BName2222.setBounds(332, 90, 150, 20);
             field3.setBounds(510, 90, 30, 20);
             BName22222.setBounds(450, 90, 150, 20);
-            pay.setBounds(300,130,150,50);
-            
+            pay.setBounds(300, 130, 150, 50);
 
             c.add(field);
             c.add(BName2);
@@ -207,31 +198,22 @@ public class PayMethod extends JFrame implements ActionListener {
             c.add(BName22222);
             c.add(pay);
             pay.addActionListener(this);
-            
 
-        }
-        else if(e.getSource().equals(pay))
-        {
-            if(field.getText().charAt(0)==' '||field.getText().charAt(field.getText().length()-1)==' ')
-            {
+        } else if (e.getSource().equals(pay)) {
+            if (field.getText().charAt(0) == ' ' || field.getText().charAt(field.getText().length() - 1) == ' ') {
                 JOptionPane.showMessageDialog(null, "Don't Leave any field empty !", "a7a", JOptionPane.PLAIN_MESSAGE);
-            }
-            else if(field1.getText().charAt(0)==' '||field1.getText().charAt(field1.getText().length()-1)==' ')
-            {
+            } else if (field1.getText().charAt(0) == ' ' || field1.getText().charAt(field1.getText().length() - 1) == ' ') {
                 JOptionPane.showMessageDialog(null, "Don't Leave any field empty !", "a7a", JOptionPane.PLAIN_MESSAGE);
-            }
-            else if(field2.getText().charAt(0)==' '||field2.getText().charAt(field2.getText().length()-1)==' ')
-            {
+            } else if (field2.getText().charAt(0) == ' ' || field2.getText().charAt(field2.getText().length() - 1) == ' ') {
                 JOptionPane.showMessageDialog(null, "Don't Leave any field empty !", "a7a", JOptionPane.PLAIN_MESSAGE);
-            }
-            else if(field3.getText().charAt(0)==' '||field3.getText().charAt(field3.getText().length()-1)==' ')
-            {
+            } else if (field3.getText().charAt(0) == ' ' || field3.getText().charAt(field3.getText().length() - 1) == ' ') {
                 JOptionPane.showMessageDialog(null, "Don't Leave any field empty !", "a7a", JOptionPane.PLAIN_MESSAGE);
-            }
-            else
-            {
-             JOptionPane.showMessageDialog(null, "Success !", "gad3", JOptionPane.PLAIN_MESSAGE);
-             
+            } else {
+                Booking.addBooking(objBooking);
+                JOptionPane.showMessageDialog(null, "Success !", "gad3", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Added Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
+                dispose();
+
             }
         }
     }

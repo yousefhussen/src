@@ -8,7 +8,10 @@ package project;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class AdminMenu extends JFrame implements ActionListener {
@@ -32,10 +35,12 @@ public class AdminMenu extends JFrame implements ActionListener {
     JTextField EorAParameter3 = new JTextField();
     JComboBox EorAParameter4 = new JComboBox();
     JComboBox EorAParameter5 = new JComboBox();
+    ReadAndWrite file;
+    
     Container c = getContentPane();
     private BufferedImage image;
 
-    public AdminMenu() throws HeadlessException {
+    public AdminMenu(ReadAndWrite ffile) throws HeadlessException {
 
         c.setLayout(null);
 
@@ -74,6 +79,18 @@ public class AdminMenu extends JFrame implements ActionListener {
         deletejoe.addActionListener(this);
         addjoe.addActionListener(this);
         editjoe.addActionListener(this);
+         this.file =ffile;
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                try {
+                    file.Write();
+                } catch (IOException ex) {
+                    Logger.getLogger(CustomerMenu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CustomerMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
         setVisible(true);
 
@@ -178,7 +195,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                 } else if ((parseInt(EorAParameter3.getText())) <= 0 || EorAParameter3.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Enter a valid price ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
                 } else {
-                    Car.getCarList().add(new Car(EorAParameter2.getText(), EorAParameter1.getText(), parseInt(EorAParameter3.getText())));
+                    Car.addCar(new Car(EorAParameter2.getText(), EorAParameter1.getText(), parseInt(EorAParameter3.getText())));
                     defaultDrawings();
                     CarIntialize();
                     JOptionPane.showMessageDialog(null, "Added Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
@@ -190,7 +207,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                 } else if (EorAParameter3.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Enter a valid password ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
                 } else {
-                    Customer.getCustomer_list().add(new Customer(EorAParameter1.getText(), (parseInt(EorAParameter2.getText())), (parseInt(EorAParameter3.getText()))));
+                    Customer.addcustomer(new Customer(EorAParameter1.getText(), (parseInt(EorAParameter2.getText())), (parseInt(EorAParameter3.getText()))));
                     defaultDrawings();
                     CustomerIntialize();
                     JOptionPane.showMessageDialog(null, "Added Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
@@ -549,9 +566,9 @@ public class AdminMenu extends JFrame implements ActionListener {
             }
 
             ID2 = new JComboBox();
-            for (int i = 0; i < Car.getCarList().size(); i++) {
-                if (Car.getCarList().get(i).getMake() != null) {
-                    ID2.addItem(Car.getCarList().get(i).getID());
+            for (int i = 0; i < Customer.getCustomer_list().size(); i++) {
+                if (Customer.getCustomer_list().get(i).getName() != null) {
+                    ID2.addItem(Customer.getCustomer_list().get(i).getCustomer_ID());
                 }
             }
             ID2.setSelectedItem(tmpelid);
@@ -814,7 +831,7 @@ public class AdminMenu extends JFrame implements ActionListener {
 
     private void CustomerDrawings() {
         if (DeleteB.isSelected() || ViewB.isSelected()) {
-            ID2.setBounds(370, 140, 100, 20);
+            ID2.setBounds(160, 50, 100, 20);
             ID2.addActionListener(this);
             c.add(ID2);
             Integer elid = (Integer) ID2.getSelectedItem();
