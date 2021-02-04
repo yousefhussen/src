@@ -45,6 +45,7 @@ public class AdminMenu extends JFrame implements ActionListener {
         c.setLayout(null);
 
         setSize(700, 360);
+       
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Menu - Admin");

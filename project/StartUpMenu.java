@@ -35,6 +35,7 @@ public class StartUpMenu extends JFrame implements ActionListener {
         c.setLayout(null);
 
         setSize(600, 400);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Car Rental");
