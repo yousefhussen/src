@@ -49,6 +49,7 @@ public class AdminMenu extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Menu - Admin");
+        setResizable(false);
         ButtonGroup group = new ButtonGroup();
 
         ViewB.setBounds(0, 0, 120, 80);

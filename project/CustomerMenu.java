@@ -50,6 +50,7 @@ public class CustomerMenu extends JFrame implements ActionListener {
         setSize(700, 360);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
         setTitle("Menu ");
         ButtonGroup group = new ButtonGroup();
 
@@ -185,9 +186,10 @@ public class CustomerMenu extends JFrame implements ActionListener {
         ID = new JComboBox();
 
         if (ViewB.isSelected()) {
+            
 
             for (int i = 0; i < Booking.getBooking_List().size(); i++) {
-                if (speed == Booking.getBooking_List().get(i).getObjCustomer()) {
+                if (speed.getCustomer_ID() == Booking.getBooking_List().get(i).getObjCustomer().getCustomer_ID()) {
                     if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
                         ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
                     }
@@ -235,7 +237,7 @@ public class CustomerMenu extends JFrame implements ActionListener {
         } else if (DeleteB.isSelected()) {
 
             for (int i = 0; i < Booking.getBooking_List().size(); i++) {
-                if (speed == Booking.getBooking_List().get(i).getObjCustomer()) {
+                if (speed.getCustomer_ID() == Booking.getBooking_List().get(i).getObjCustomer().getCustomer_ID()) {
                     if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
 
                         ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
@@ -259,7 +261,7 @@ public class CustomerMenu extends JFrame implements ActionListener {
             //add combo box for bookings
 
             for (int i = 0; i < Booking.getBooking_List().size(); i++) {
-                if (speed == Booking.getBooking_List().get(i).getObjCustomer()) {
+                if (speed.getCustomer_ID() == Booking.getBooking_List().get(i).getObjCustomer().getCustomer_ID()) {
                     if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
 
                         ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
