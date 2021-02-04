@@ -36,7 +36,7 @@ public class AdminMenu extends JFrame implements ActionListener {
     JComboBox EorAParameter4 = new JComboBox();
     JComboBox EorAParameter5 = new JComboBox();
     ReadAndWrite file;
-    
+
     Container c = getContentPane();
     private BufferedImage image;
 
@@ -45,7 +45,7 @@ public class AdminMenu extends JFrame implements ActionListener {
         c.setLayout(null);
 
         setSize(700, 360);
-       
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Menu - Admin");
@@ -81,7 +81,7 @@ public class AdminMenu extends JFrame implements ActionListener {
         deletejoe.addActionListener(this);
         addjoe.addActionListener(this);
         editjoe.addActionListener(this);
-         this.file =ffile;
+        this.file = ffile;
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 try {
@@ -145,7 +145,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                 BookingIntialize();
                 CarDrawings();
                 CustomerDrawings();
-            } else if (EditB.isSelected()&& BookingB.isSelected()) {
+            } else if (EditB.isSelected() && BookingB.isSelected()) {
                 BookingDrawings();
                 CarDrawings();
                 CustomerDrawings();
@@ -262,7 +262,6 @@ public class AdminMenu extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Edited Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
                 }
 
-
             }
         }
 
@@ -297,8 +296,6 @@ public class AdminMenu extends JFrame implements ActionListener {
                     ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
                 }
 
-
-
             }
 
             ID.setBounds(160, 50, 100, 20);
@@ -311,22 +308,20 @@ public class AdminMenu extends JFrame implements ActionListener {
 
                 if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
 
-
                     ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
                 }
             }
 
-            if(!ID.isShowing())
-            {   System.out.println((int)ID.getSelectedItem());  
+            if (!ID.isShowing()) {
+                System.out.println((int) ID.getSelectedItem());
                 ID.setBounds(160, 50, 100, 20);
 
-                  ID.addActionListener(this);
-            deletejoe.setBounds(200, 250, 100, 20);
+                ID.addActionListener(this);
+                deletejoe.setBounds(200, 250, 100, 20);
 
-            c.add(deletejoe);
-            c.add(ID);
+                c.add(deletejoe);
+                c.add(ID);
             }
-          
 
         } else if (AddB.isSelected()) {
 
@@ -486,15 +481,22 @@ public class AdminMenu extends JFrame implements ActionListener {
             JLabel BName222 = new JLabel("Car Price : ");
 
             EorAParameter1.setBounds(300, 100, 100, 20);
-            EorAParameter1.setText(Car.getCarList().get((Integer) ID1.getSelectedItem()).getMake());
+
             BName2.setBounds(180, 100, 120, 20);
             EorAParameter2.setBounds(300, 120, 100, 20);
-            EorAParameter2.setText(Car.getCarList().get((Integer) ID1.getSelectedItem()).getModel());
+
             BName22.setBounds(180, 120, 120, 20);
             EorAParameter3.setBounds(300, 140, 100, 20);
-            Integer price = Car.getCarList().get((Integer) ID1.getSelectedItem()).getPrice();
-            EorAParameter3.setText(price.toString());
+
             BName222.setBounds(180, 140, 120, 20);
+            try {
+                EorAParameter1.setText(Car.getCarList().get((Integer) ID1.getSelectedItem()).getMake());
+                EorAParameter2.setText(Car.getCarList().get((Integer) ID1.getSelectedItem()).getModel());
+                Integer price = Car.getCarList().get((Integer) ID1.getSelectedItem()).getPrice();
+                EorAParameter3.setText(price.toString());
+            } catch (Exception  e) {
+                
+            }
 
             c.add(EorAParameter1);
             c.add(BName2);
