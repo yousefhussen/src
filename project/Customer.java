@@ -91,67 +91,6 @@ public class Customer implements Serializable {
           
     }
 
-    public static void editCustomer(int id) {
-        Customer customerTemp = customer_list.get(id);
-        System.out.println("===========================================");
-        System.out.println("Customer Name : " + customerTemp.getName());
-        System.out.println("Cuatomer Age : " + customerTemp.getAge());
-        //  System.out.println("Customer password : " + customerTemp.getpassword());
-        System.out.println("Customer password : " + "****");
-        System.out.println("Would you like to change any of these items ?(yes/no)");
-        Scanner input = new Scanner(System.in);
-        String x = input.next();
-        int temp = 0;
-        while (x.equalsIgnoreCase("yes")) {
-            System.out.println("enter the name of the item you would like to change ");
-            String y = input.next();
-            if (y.equalsIgnoreCase("name")) {
-                System.out.println("Enter the new name");
-                String newName = input.next();
-                customerTemp.setName(newName);
-            } else if (y.equalsIgnoreCase("age")) {
-                System.out.println("Enter the new age");
-                int newAge = input.nextInt();
-                customerTemp.setAge(newAge);
-            } else if (y.equalsIgnoreCase("password")) {
-                System.out.println("Enter the old password");
-                int h = input.nextInt();
-                if (h == customerTemp.getpassword()) {
-                    System.out.println("Enter the new password");
-                    int newPassword = input.nextInt();
-                    customerTemp.setPassword(newPassword);
-                } else {
-                    System.out.println("Calling the police !!");
-                    temp = 1;
-                    return;
-                }
-            }
-            System.out.println("Customer Name : " + customerTemp.getName());
-            System.out.println("Cuatomer Age : " + customerTemp.getAge());
-            if (temp == 0) {
-                System.out.println("Customer password : " + customerTemp.getpassword());
-            } else {
-                System.out.println(" ");
-            }
-            // System.out.println("Customer password : " + customerTemp.getpassword());
-            System.out.println(" ");
-            System.out.println("Would you like to change any of these items ?(yes/no)");
-            x = input.next();
-        }
-    }
-
-    public static void viewMemberList() {
-        for (int i = 0; i < customer_list.size(); i++) {
-            System.out.println("===========================================");
-            System.out.println("Customer ID: " + i);
-            System.out.println("===========================================");
-            System.out.println("Customer Name : " + customer_list.get(i).getName());
-            System.out.println("Cuatomer Age : " + customer_list.get(i).getAge());
-            System.out.println("Customer password : " + customer_list.get(i).getpassword());
-
-        }
-    }
-
     public static void deleteCustomer(int customer_id) {
         customer_list.set(customer_id, new Customer(null,-1,-1));
     }

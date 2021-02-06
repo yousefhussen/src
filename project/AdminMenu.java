@@ -10,9 +10,11 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
+import java.text.NumberFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 
 public class AdminMenu extends JFrame implements ActionListener {
 
@@ -33,6 +35,7 @@ public class AdminMenu extends JFrame implements ActionListener {
     JTextField EorAParameter1 = new JTextField();
     JTextField EorAParameter2 = new JTextField();
     JTextField EorAParameter3 = new JTextField();
+    JPasswordField EorAParameter6 = new JPasswordField();
     JComboBox EorAParameter4 = new JComboBox();
     JComboBox EorAParameter5 = new JComboBox();
     ReadAndWrite file;
@@ -94,6 +97,7 @@ public class AdminMenu extends JFrame implements ActionListener {
             }
         });
 
+//       
         setVisible(true);
 
     }
@@ -192,9 +196,12 @@ public class AdminMenu extends JFrame implements ActionListener {
                 }
 
             } else if (CarB.isSelected()) {
+                try {
+                    Integer.parseInt(EorAParameter3.getText());
+                    
                 if (EorAParameter1.getText().isEmpty() || EorAParameter2.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Fill the Brand and the Model  ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
-                } else if ((parseInt(EorAParameter3.getText())) <= 0 || EorAParameter3.getText().isEmpty()) {
+                } else if (EorAParameter3.getText().isEmpty() || (parseInt(EorAParameter3.getText())) <= 0) {
                     JOptionPane.showMessageDialog(null, "Enter a valid price ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
                 } else {
                     Car.addCar(new Car(EorAParameter2.getText(), EorAParameter1.getText(), parseInt(EorAParameter3.getText())));
@@ -202,17 +209,30 @@ public class AdminMenu extends JFrame implements ActionListener {
                     CarIntialize();
                     JOptionPane.showMessageDialog(null, "Added Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
                 }
+                    
+                    
+                } catch (NumberFormatException eeee) {
+                     JOptionPane.showMessageDialog(null, "Enter a valid price ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
+                }
+
 
             } else if (CustomerB.isSelected()) {
+                 try {
+                    //Integer.parseInt(EorAParameter6.getText());
+                    
                 if (EorAParameter1.getText().isEmpty() || EorAParameter2.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Fill the Name And The Age  ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
-                } else if (EorAParameter3.getText().isEmpty()) {
+                } else if (EorAParameter6.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Enter a valid password ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
                 } else {
-                    Customer.addcustomer(new Customer(EorAParameter1.getText(), (parseInt(EorAParameter2.getText())), (parseInt(EorAParameter3.getText()))));
+                    Customer.addcustomer(new Customer(EorAParameter1.getText(), (parseInt(EorAParameter2.getText())), (parseInt(EorAParameter6.getText()))));
                     defaultDrawings();
                     CustomerIntialize();
+                    EorAParameter6.setText("");
                     JOptionPane.showMessageDialog(null, "Added Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
+                }
+                 } catch (NumberFormatException eeee) {
+                    JOptionPane.showMessageDialog(null, "Enter a valid password " + EorAParameter6.getText(), "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
                 }
 
             }
@@ -494,8 +514,8 @@ public class AdminMenu extends JFrame implements ActionListener {
                 EorAParameter2.setText(Car.getCarList().get((Integer) ID1.getSelectedItem()).getModel());
                 Integer price = Car.getCarList().get((Integer) ID1.getSelectedItem()).getPrice();
                 EorAParameter3.setText(price.toString());
-            } catch (Exception  e) {
-                
+            } catch (Exception e) {
+
             }
 
             c.add(EorAParameter1);
@@ -551,14 +571,14 @@ public class AdminMenu extends JFrame implements ActionListener {
             BName2.setBounds(180, 100, 130, 20);
             EorAParameter2.setBounds(320, 120, 100, 20);
             BName22.setBounds(180, 120, 130, 20);
-            EorAParameter3.setBounds(320, 140, 100, 20);
+            EorAParameter6.setBounds(320, 140, 100, 20);
             BName222.setBounds(180, 140, 130, 20);
 
             c.add(EorAParameter1);
             c.add(BName2);
             c.add(EorAParameter2);
             c.add(BName22);
-            c.add(EorAParameter3);
+            c.add(EorAParameter6);
             c.add(BName222);
             addjoe.setBounds(200, 250, 100, 20);
 
