@@ -32,7 +32,6 @@ public class Project {
 
       
       
-       //PayMethod q1 = new PayMethod(b1);
   StartUpMenu start = new StartUpMenu("Basha","7" , w1);
    
    

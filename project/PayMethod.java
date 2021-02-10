@@ -89,28 +89,28 @@ public class PayMethod extends JFrame implements ActionListener {
             JLabel BNameS = new JLabel(temp.toString());
             JLabel BNameSS = new JLabel("Booking ID : ");
 
-            BName1.setBounds(300 - 100, 100 - 100, 100, 20);
-            BName2.setBounds(180 - 100, 100 - 100, 120, 20);
+            BName1.setBounds(200, 0, 100, 20);
+            BName2.setBounds(80, 0, 120, 20);
 
-            BName11.setBounds(300 - 100, 120 - 100, 100, 20);
-            BName22.setBounds(180 - 100, 120 - 100, 120, 20);
+            BName11.setBounds(200, 20, 100, 20);
+            BName22.setBounds(80, 20, 120, 20);
 
-            BName111.setBounds(300 - 100, 140 - 100, 100, 20);
-            BName222.setBounds(180 - 100, 140 - 100, 120, 20);
+            BName111.setBounds(200, 40, 100, 20);
+            BName222.setBounds(80, 40, 120, 20);
 
-            BName1111.setBounds(300 - 100, 160 - 100, 100, 20);
-            BName2222.setBounds(180 - 100, 160 - 100, 120, 20);
+            BName1111.setBounds(200, 60, 100, 20);
+            BName2222.setBounds(80, 60, 120, 20);
 
-            BName11111.setBounds(300 - 100, 180 - 100, 100, 20);
-            BName22222.setBounds(180 - 100, 180 - 100, 120, 20);
+            BName11111.setBounds(200, 80, 100, 20);
+            BName22222.setBounds(80, 80, 120, 20);
 
-            BNameS.setBounds(300 - 100, 200 - 100, 100, 20);
+            BNameS.setBounds(200, 100, 100, 20);
             BNameS.setFont(new Font("Serif", Font.PLAIN, 25));
             BNameS.setForeground(Color.red);
-            BNameSS.setBounds(180 - 100, 200 - 100, 120, 20);
+            BNameSS.setBounds(80, 100, 120, 20);
 
             JLabel Message = new JLabel("Please go to the nearest branch , Use your ID : " + BNameS.getText() + " To pay");
-            Message.setBounds(180 - 100, 250 - 100, 350, 20);
+            Message.setBounds(80, 150, 350, 20);
 
             c.add(Message);
 

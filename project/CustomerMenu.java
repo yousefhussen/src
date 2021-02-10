@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package project;
 
 import java.awt.*;
@@ -246,8 +242,6 @@ public class CustomerMenu extends JFrame implements ActionListener {
             }
 
             if (!ID.isShowing()) {
-//                ID.setSelectedIndex(0);
-//                System.out.println((int) ID.getSelectedItem());
                 ID.setBounds(160, 50, 100, 20);
 
                 ID.addActionListener(this);
@@ -341,20 +335,14 @@ public class CustomerMenu extends JFrame implements ActionListener {
             }
         } else if (AddB.isSelected()) {
 
-            //EorAParameter1.setText(Booking.getBooking_List().get(elid).getBooking_End());
             JLabel BName2 = new JLabel("Booking End Date : ");
 
-            //EorAParameter2.setText(Booking.getBooking_List().get(elid).getBooking_Start());
             JLabel BName22 = new JLabel("Booking Start Date : ");
 
-            //JLabel BName111 = new JLabel(Booking.getBooking_List().get(elid).getObjCar().getMake());
             JLabel BName222 = new JLabel("Booking Car Brand : ");
 
-            //JLabel BName1111 = new JLabel(Booking.getBooking_List().get(elid).getObjCar().getModel());
             JLabel BName2222 = new JLabel("Booking Car Model : ");
 
-            //Integer price = Booking.getBooking_List().get(elid).getObjCar().getPrice();
-            //JLabel BName11111 = new JLabel(price.toString());
             JLabel BName22222 = new JLabel("Booking Car Price : ");
 
             EorAParameter1.setBounds(300, 100, 100, 20);
@@ -363,31 +351,24 @@ public class CustomerMenu extends JFrame implements ActionListener {
             EorAParameter2.setBounds(300, 120, 100, 20);
             BName22.setBounds(180, 120, 120, 20);
 
-            //BName111.setBounds(300, 140, 100, 20);
             BName222.setBounds(180, 140, 120, 20);
 
-            //BName1111.setBounds(300, 160, 100, 20);
             BName2222.setBounds(180, 160, 120, 20);
 
-            //BName11111.setBounds(300, 180, 100, 20);
             BName22222.setBounds(180, 180, 120, 20);
 
             c.add(EorAParameter2);
             c.add(BName22);
             c.add(EorAParameter1);
             c.add(BName2);
-            //c.add(BName111);
             c.add(BName222);
-            // c.add(BName1111);
             c.add(BName2222);
-            //c.add(BName11111);
             c.add(BName22222);
         } else if (EditB.isSelected()) {
             ID.setBounds(160, 50, 100, 20);
 
             c.add(ID);
             Integer elid = (Integer) ID.getSelectedItem();
-            //show the start and end date and their text fields
             JLabel BName2 = new JLabel("Booking End Date : ");
 
             JLabel BName22 = new JLabel("Booking Start Date : ");
@@ -403,14 +384,10 @@ public class CustomerMenu extends JFrame implements ActionListener {
             c.add(BName2);
             c.add(EorAParameter2);
             c.add(BName22);
-            //show the combobox for the list of cars and it's lapbel
             Object tmpelid = Booking.getBooking_List().get(elid).getObjCar().getID();
             System.out.println(tmpelid);
-            //ID1 = new JComboBox();
 
-            if (ID.getSelectedIndex() == -1) {
-                //  ID1.setSelectedItem(tmpelid);
-            }
+           
 
             ID1.setBounds(300, 140, 100, 20);
 
@@ -418,13 +395,8 @@ public class CustomerMenu extends JFrame implements ActionListener {
             JLabel combolabel = new JLabel("Choose a car : ");
             combolabel.setBounds(180, 140, 100, 20);
             c.add(combolabel);
-            //show the combobox for the list of Customers and it's label
-            Object tmpelid1 = Booking.getBooking_List().get(elid).getObjCustomer().getCustomer_ID();
-            //ID2 = new JComboBox();
 
-            if (ID.getSelectedIndex() == -1) {
-                // ID2.setSelectedItem(tmpelid1);
-            }
+           
 
             editjoe.setBounds(200, 250, 100, 20);
             c.add(editjoe);

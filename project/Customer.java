@@ -20,15 +20,10 @@ public class Customer implements Serializable {
 
     public Customer() {
         customer_list = new ArrayList<>();
-//         Customer_ID = numOfObjects;
-//         Name="";
-//         Age=0;
-//         password=0;
-//         numOfObjects++;
+
     }
 
     public Customer(String Name, int Age, int password) {
-        //this.customer_list=customer_list;
       
         this.Customer_ID = numOfObjects;
         this.Name = Name;
