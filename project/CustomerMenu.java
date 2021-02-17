@@ -1,4 +1,3 @@
-
 package project;
 
 import java.awt.*;
@@ -36,15 +35,15 @@ public class CustomerMenu extends JFrame implements ActionListener {
     JTextField EorAParameter3 = new JTextField();
     JComboBox EorAParameter4 = new JComboBox();
     JComboBox EorAParameter5 = new JComboBox();
-    ReadAndWrite file ;
+    ReadAndWrite file;
     private BufferedImage image;
 
-    public CustomerMenu(Customer speed2 , ReadAndWrite ffile) throws HeadlessException {
+    public CustomerMenu(Customer speed2, ReadAndWrite ffile) throws HeadlessException {
 
         c.setLayout(null);
         speed = speed2;
         setSize(700, 360);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Menu ");
@@ -75,20 +74,60 @@ public class CustomerMenu extends JFrame implements ActionListener {
         BookingB.setBounds(120, 0, 565, 40);
 
         BookingB.addActionListener(this);
-        this.file =ffile;
-        this.addWindowListener(new WindowAdapter() {
+        this.file = ffile;
+      addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                try {
-                    file.Write();
-                } catch (IOException ex) {
-                    Logger.getLogger(CustomerMenu.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CustomerMenu.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                handleClosing();
             }
         });
         setVisible(true);
 
+    }
+
+    private void handleClosing() {
+
+        int answer = showWarningMessage();
+
+        switch (answer) {
+            case JOptionPane.YES_OPTION:
+                
+                
+                StartUpMenu start = new StartUpMenu("Basha", "7", file);
+                 dispose();
+                break;
+
+            case JOptionPane.NO_OPTION:
+                try {
+                    file.Write();
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(CustomerMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 dispose();
+                break;
+
+            case JOptionPane.CANCEL_OPTION:
+
+                break;
+        }
+
+       
+
+    }
+
+    private int showWarningMessage() {
+        String[] buttonLabels = new String[]{"Main menu", "Exit to desktop", "Cancel"};
+        String defaultOption = buttonLabels[0];
+        Icon icon = null;
+
+        return JOptionPane.showOptionDialog(this,
+                "Save and Exit to Desktop.\n"
+                + "Or back to main menu?",
+                "Warning",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                icon,
+                buttonLabels,
+                defaultOption);
     }
 
     @Override
@@ -182,7 +221,6 @@ public class CustomerMenu extends JFrame implements ActionListener {
         ID = new JComboBox();
 
         if (ViewB.isSelected()) {
-            
 
             for (int i = 0; i < Booking.getBooking_List().size(); i++) {
                 if (speed.getCustomer_ID() == Booking.getBooking_List().get(i).getObjCustomer().getCustomer_ID()) {
@@ -387,16 +425,12 @@ public class CustomerMenu extends JFrame implements ActionListener {
             Object tmpelid = Booking.getBooking_List().get(elid).getObjCar().getID();
             System.out.println(tmpelid);
 
-           
-
             ID1.setBounds(300, 140, 100, 20);
 
             c.add(ID1);
             JLabel combolabel = new JLabel("Choose a car : ");
             combolabel.setBounds(180, 140, 100, 20);
             c.add(combolabel);
-
-           
 
             editjoe.setBounds(200, 250, 100, 20);
             c.add(editjoe);

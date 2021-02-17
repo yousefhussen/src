@@ -49,7 +49,7 @@ public class AdminMenu extends JFrame implements ActionListener {
 
         setSize(700, 360);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Menu - Admin");
         setResizable(false);
@@ -85,21 +85,61 @@ public class AdminMenu extends JFrame implements ActionListener {
         addjoe.addActionListener(this);
         editjoe.addActionListener(this);
         this.file = ffile;
-        this.addWindowListener(new WindowAdapter() {
+       addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                try {
-                    file.Write();
-                } catch (IOException ex) {
-                    Logger.getLogger(CustomerMenu.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CustomerMenu.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                handleClosing();
             }
         });
 
 //       
         setVisible(true);
 
+    }
+    
+     private void handleClosing() {
+
+        int answer = showWarningMessage();
+
+        switch (answer) {
+            case JOptionPane.YES_OPTION:
+                
+                
+                StartUpMenu start = new StartUpMenu("Basha", "7", file);
+                 dispose();
+                break;
+
+            case JOptionPane.NO_OPTION:
+                try {
+                    file.Write();
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(CustomerMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 dispose();
+                break;
+
+            case JOptionPane.CANCEL_OPTION:
+
+                break;
+        }
+
+       
+
+    }
+    
+      private int showWarningMessage() {
+        String[] buttonLabels = new String[]{"Main menu", "Exit to desktop", "Cancel"};
+        String defaultOption = buttonLabels[0];
+        Icon icon = null;
+
+        return JOptionPane.showOptionDialog(this,
+                "Save and Exit to Desktop.\n"
+                + "Or back to main menu?",
+                "Warning",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                icon,
+                buttonLabels,
+                defaultOption);
     }
 
     @Override

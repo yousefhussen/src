@@ -26,8 +26,9 @@ public class Project {
       Booking.addBooking(b1);
       Booking b2=new Booking("1/1/2020","5/5/2020",c2,c4);
 
-      Booking.addBooking(b2);  
-//      CustomerMenu c77=new CustomerMenu(c3);
+      Booking.addBooking(b2); 
+   //   PayMethod q1 = new PayMethod(b2);
+    //CustomerMenu c77=new CustomerMenu(c3);
 //      AdminMenu s1 = new AdminMenu();
 
       

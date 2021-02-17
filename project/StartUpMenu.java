@@ -1,6 +1,5 @@
 package project;
 
-import java.util.Scanner;
 import java.awt.*;
 import java.awt.event.*;
 import static java.lang.Integer.parseInt;
@@ -12,25 +11,25 @@ public class StartUpMenu extends JFrame implements ActionListener {
     private String Password;
     private JLabel user;
     private JLabel admin;
-    private JLabel CustmoerOrAdmin;
+  
     private JTextField tf1;
     private JLabel NA;
     private JTextField NameAdmin, DG;
     private JLabel PA, AG;
     private JPasswordField PassAdmin;
-    private JLabel IDLogin;  
-    private JTextField IDLoginEnter ;
+    private JLabel IDLogin;
+    private JTextField IDLoginEnter;
     private ReadAndWrite file;
-     
+    private JLabel pp;
 
 //    private JTextField tf2;
-    private JButton b1, b2, b3, b4, b5 , b6;
+    private JButton b1, b2, b3, b4, b5, b6;
 
-    public StartUpMenu(String adminName, String Password ,ReadAndWrite file) {
+    public StartUpMenu(String adminName, String Password, ReadAndWrite file) {
 
         this.adminName = adminName;
         this.Password = Password;
-         this.file =file;
+        this.file = file;
         Container c = getContentPane();
         c.setLayout(null);
 
@@ -43,17 +42,20 @@ public class StartUpMenu extends JFrame implements ActionListener {
         b1 = new JButton("Admin");
         b2 = new JButton("Customer");
 
-        b1.setBounds(170, 260 / 2, 100, 40);
-        b2.setBounds(290, 260 / 2, 100, 40);
-        CustmoerOrAdmin = new JLabel("Are you a user or a Admin");
-        CustmoerOrAdmin.setBounds(200, 115, 150, 15);
+        b1.setBounds(170, 100, 100, 40);
+        b2.setBounds(290, 100, 100, 40);
+        
 
-        c.add(CustmoerOrAdmin);
+        
 
         c.add(b1);
         c.add(b2);
         b1.addActionListener(this);
         b2.addActionListener(this);
+
+         pp = new JLabel(new ImageIcon("split2.jpg"));
+        pp.setBounds(0, 0, 600, 400);
+        c.add(pp);
         setVisible(true);
 
     }
@@ -61,6 +63,7 @@ public class StartUpMenu extends JFrame implements ActionListener {
     StartUpMenu() {
 
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(b1)) {
@@ -83,12 +86,13 @@ public class StartUpMenu extends JFrame implements ActionListener {
             PassAdmin.setBounds(280, 140, 90, 25);
             b6.setBounds(225, 200, 100, 40);
             b6.addActionListener(this);
-
+           
             b.add(NA);
             b.add(NameAdmin);
             b.add(PA);
             b.add(PassAdmin);
             b.add(b6);
+            b.add(pp);
 
         } else if (e.getSource().equals(b2)) {
 
@@ -109,9 +113,9 @@ public class StartUpMenu extends JFrame implements ActionListener {
             b4.addActionListener(this);
             NA.setBounds(200, 50, 100, 100);
             PA.setBounds(200, 100, 100, 100);
-           
+
             NameAdmin.setBounds(280, 90, 90, 25);
-            PassAdmin.setBounds(280, 140, 90, 25); 
+            PassAdmin.setBounds(280, 140, 90, 25);
             IDLogin.setBounds(200, 10, 100, 100);
             IDLoginEnter.setBounds(280, 50, 90, 25);
             b3.setBounds(225, 200, 100, 40);
@@ -124,39 +128,33 @@ public class StartUpMenu extends JFrame implements ActionListener {
             b.add(b4);
             b.add(IDLogin);
             b.add(IDLoginEnter);
+            b.add(pp);
 
         } else if (e.getSource().equals(b3)) {
-            try
-            {
-                int SH= Integer.parseInt(IDLoginEnter.getText());
-                
-                Customer temp = Customer.getCustomer_list().get(SH); 
-                if (temp.getName().equals(NameAdmin.getText())&&temp.getpassword()==(Integer.parseInt(PassAdmin.getText())))
-            {
-              
-                  
-                getContentPane().removeAll();
-                getContentPane().repaint();
+            try {
+                int SH = Integer.parseInt(IDLoginEnter.getText());
 
-                Container bb = getContentPane();
-                bb.setLayout(null);
-                dispose();
-                CustomerMenu c77=new CustomerMenu(temp ,  this.file);
-               
+                Customer temp = Customer.getCustomer_list().get(SH);
+                if (temp.getName().equals(NameAdmin.getText()) && temp.getpassword() == (Integer.parseInt(PassAdmin.getText()))) {
 
-            } else {
+                    getContentPane().removeAll();
+                    getContentPane().repaint();
 
-                JOptionPane.showMessageDialog(null, "username or password wrong ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
+                    Container bb = getContentPane();
+                    bb.setLayout(null);
+                    dispose();
+                    CustomerMenu c77 = new CustomerMenu(temp, this.file);
 
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "username or password wrong ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
+
+                }
+            } catch (Exception ee) {
+
+                JOptionPane.showMessageDialog(null, "A customer with this ID Doesn't exist ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
             }
-            }
-            catch(Exception ee){
-                    
-                     JOptionPane.showMessageDialog(null, "A customer with this ID Doesn't exist ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
-            }
-            
-            
-          
+
         } else if (e.getSource().equals(b4)) {
             getContentPane().removeAll();
             getContentPane().repaint();
@@ -188,6 +186,7 @@ public class StartUpMenu extends JFrame implements ActionListener {
             b.add(AG);
             b.add(DG);
             b.add(b5);
+            b.add(pp);
 
         } else if (e.getSource().equals(b5)) {
             if (DG.getText().equals("") || PassAdmin.getText().equals("") || NameAdmin.getText().equals("")) {
@@ -200,23 +199,22 @@ public class StartUpMenu extends JFrame implements ActionListener {
                 Customer.addcustomer(newCustomer);
                 JOptionPane.showMessageDialog(null, "Signed successfully,your ID is  " + newCustomer.getCustomer_ID(), "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
                 dispose();
-                CustomerMenu c3 = new CustomerMenu(newCustomer , this.file);
+                CustomerMenu c3 = new CustomerMenu(newCustomer, this.file);
 
             }
 
-        }
-        else if (e.getSource().equals(b6)) {
-            if (PassAdmin.getText().equals(Password)&& NameAdmin.getText().equals(adminName)) {
-                
-               
-                dispose();
-                 AdminMenu s1 = new AdminMenu(this.file);
+        } else if (e.getSource().equals(b6)) {
+            if (PassAdmin.getText().equals(Password) && NameAdmin.getText().equals(adminName)) {
 
-            }else{
-                 JOptionPane.showMessageDialog(null, "username or password wrong ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
+                dispose();
+                AdminMenu s1 = new AdminMenu(this.file);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "username or password wrong ", "Incorrect Parameters", JOptionPane.PLAIN_MESSAGE);
             }
 
         }
 
     }
+
 }
