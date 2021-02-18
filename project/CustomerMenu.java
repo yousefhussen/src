@@ -37,6 +37,7 @@ public class CustomerMenu extends JFrame implements ActionListener {
     JComboBox EorAParameter5 = new JComboBox();
     ReadAndWrite file;
     private BufferedImage image;
+    private JLabel pp;
 
     public CustomerMenu(Customer speed2, ReadAndWrite ffile) throws HeadlessException {
 
@@ -64,6 +65,11 @@ public class CustomerMenu extends JFrame implements ActionListener {
         addjoe.addActionListener(this);
         deletejoe.addActionListener(this);
         editjoe.addActionListener(this);
+        //0
+        //Mohamed   1244
+        pp = new JLabel(new ImageIcon("cars2.jpg"));
+        pp.setBounds(120, 0, 700, 360);
+        c.add(pp);
         c.add(ViewB);
         c.add(AddB);
         c.add(DeleteB);
@@ -75,7 +81,7 @@ public class CustomerMenu extends JFrame implements ActionListener {
 
         BookingB.addActionListener(this);
         this.file = ffile;
-      addWindowListener(new WindowAdapter() {
+        addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 handleClosing();
             }
@@ -90,10 +96,9 @@ public class CustomerMenu extends JFrame implements ActionListener {
 
         switch (answer) {
             case JOptionPane.YES_OPTION:
-                
-                
+
                 StartUpMenu start = new StartUpMenu("Basha", "7", file);
-                 dispose();
+                dispose();
                 break;
 
             case JOptionPane.NO_OPTION:
@@ -102,7 +107,7 @@ public class CustomerMenu extends JFrame implements ActionListener {
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(CustomerMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                 dispose();
+                dispose();
                 break;
 
             case JOptionPane.CANCEL_OPTION:
@@ -110,6 +115,18 @@ public class CustomerMenu extends JFrame implements ActionListener {
                 break;
         }
 
+    }
+
+    private void displayBackground(int focus) {
+        if (focus == 0) {
+              pp = new JLabel(new ImageIcon("cars3.jpg"));
+               pp.setBounds(120, 0, 700, 360);
+               c.add(pp);
+        } else {
+             pp = new JLabel(new ImageIcon("cars2.jpg"));
+              pp.setBounds(120, 0, 700, 360);
+            c.add(pp);
+        }
        
 
     }
@@ -135,13 +152,16 @@ public class CustomerMenu extends JFrame implements ActionListener {
         if (e.getSource().equals(ViewB) || e.getSource().equals(AddB) || e.getSource().equals(DeleteB) || e.getSource().equals(EditB)) {
 
             defaultDrawings();
-
+            displayBackground(1);
         } else if (e.getSource().equals(BookingB)) {
+
             defaultDrawings();
             BookingIntialize();
+            displayBackground(1);
         } else if (e.getSource().equals(ID)) {
             defaultDrawings();
             BookingDrawings();
+            displayBackground(0);
 
         } else if (e.getSource().equals(ID1)) {
 
@@ -157,6 +177,7 @@ public class CustomerMenu extends JFrame implements ActionListener {
             } else {
                 CarDrawings();
             }
+            displayBackground(0);
 
         } else if (e.getSource().equals(deletejoe)) {
 
@@ -186,13 +207,16 @@ public class CustomerMenu extends JFrame implements ActionListener {
             if (BookingB.isSelected()) {
                 if (EorAParameter1.getText().isEmpty() || EorAParameter2.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Fill the start and end date ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
-                } else if (ID1.getSelectedIndex() == -1) {
-                    JOptionPane.showMessageDialog(null, "Choose a car ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
                 } else {
                     Booking Temp = Booking.getBooking_List().get((Integer) (ID.getSelectedItem()));
                     Temp.setBooking_End(EorAParameter1.getText());
                     Temp.setBooking_Start(EorAParameter2.getText());
-                    Temp.setObjCar(Car.getCarList().get((Integer) ID1.getSelectedItem()));
+                    if (ID1.getSelectedIndex() == -1) {
+                        Temp.setObjCar(Booking.getBooking_List().get((Integer) ID.getSelectedItem()).getObjCar());
+                    } else {
+                        Temp.setObjCar(Car.getCarList().get((Integer) ID1.getSelectedItem()));
+                    }
+
                     Temp.setObjCustomer(speed);
                     defaultDrawings();
                     BookingIntialize();
@@ -423,7 +447,6 @@ public class CustomerMenu extends JFrame implements ActionListener {
             c.add(EorAParameter2);
             c.add(BName22);
             Object tmpelid = Booking.getBooking_List().get(elid).getObjCar().getID();
-            System.out.println(tmpelid);
 
             ID1.setBounds(300, 140, 100, 20);
 

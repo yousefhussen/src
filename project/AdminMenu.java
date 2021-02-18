@@ -280,15 +280,18 @@ public class AdminMenu extends JFrame implements ActionListener {
             if (BookingB.isSelected()) {
                 if (EorAParameter1.getText().isEmpty() || EorAParameter2.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Fill the start and end date ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
-                } else if (ID1.getSelectedIndex() == -1) {
-                    JOptionPane.showMessageDialog(null, "Choose a car ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
                 } else if (ID2.getSelectedIndex() == -1) {
                     JOptionPane.showMessageDialog(null, "Choose a Customer ", "Empty Parameters", JOptionPane.PLAIN_MESSAGE);
                 } else {
                     Booking Temp = Booking.getBooking_List().get((Integer) (ID.getSelectedItem()));
                     Temp.setBooking_End(EorAParameter1.getText());
                     Temp.setBooking_Start(EorAParameter2.getText());
-                    Temp.setObjCar(Car.getCarList().get((Integer) ID1.getSelectedItem()));
+                    if (ID1.getSelectedIndex() == -1) {
+                        Temp.setObjCar(Booking.getBooking_List().get((Integer)ID.getSelectedItem()).getObjCar());
+                    } else {
+                         Temp.setObjCar(Car.getCarList().get((Integer) ID1.getSelectedItem()));
+                    }
+                   
                     Temp.setObjCustomer(Customer.getCustomer_list().get((Integer) ID2.getSelectedItem()));
                     defaultDrawings();
                     BookingIntialize();

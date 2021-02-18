@@ -2,7 +2,10 @@ package project;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class StartUpMenu extends JFrame implements ActionListener {
@@ -11,7 +14,7 @@ public class StartUpMenu extends JFrame implements ActionListener {
     private String Password;
     private JLabel user;
     private JLabel admin;
-  
+
     private JTextField tf1;
     private JLabel NA;
     private JTextField NameAdmin, DG;
@@ -35,7 +38,7 @@ public class StartUpMenu extends JFrame implements ActionListener {
 
         setSize(600, 400);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Car Rental");
 //        setLayout(new FlowLayout(FlowLayout.CENTER , 100 , 250));
@@ -44,24 +47,57 @@ public class StartUpMenu extends JFrame implements ActionListener {
 
         b1.setBounds(170, 100, 100, 40);
         b2.setBounds(290, 100, 100, 40);
-        
-
-        
 
         c.add(b1);
         c.add(b2);
         b1.addActionListener(this);
         b2.addActionListener(this);
 
-         pp = new JLabel(new ImageIcon("split2.jpg"));
+        pp = new JLabel(new ImageIcon("split2.jpg"));
         pp.setBounds(0, 0, 600, 400);
         c.add(pp);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                handleClosing();
+            }
+        });
         setVisible(true);
 
     }
 
     StartUpMenu() {
 
+    }
+
+    private void handleClosing() {
+
+        int answer = showWarningMessage();
+
+        switch (answer) {
+            case JOptionPane.NO_OPTION:
+
+                break;
+
+            case JOptionPane.YES_OPTION:
+                try {
+                    file.Write();
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(CustomerMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                dispose();
+                break;
+
+        }
+
+    }
+
+    private int showWarningMessage() {
+        String[] buttonLabels = new String[]{"Exit to desktop", "Continue"};
+        String defaultOption = buttonLabels[0];
+        Icon icon = null;
+
+        return JOptionPane.showOptionDialog(this, "Exit? or Continue.\n", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, icon, buttonLabels, defaultOption);
     }
 
     @Override
@@ -86,7 +122,7 @@ public class StartUpMenu extends JFrame implements ActionListener {
             PassAdmin.setBounds(280, 140, 90, 25);
             b6.setBounds(225, 200, 100, 40);
             b6.addActionListener(this);
-           
+
             b.add(NA);
             b.add(NameAdmin);
             b.add(PA);
