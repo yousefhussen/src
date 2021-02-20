@@ -406,7 +406,7 @@ public class AdminMenu extends JFrame implements ActionListener {
             }
 
             if (!ID.isShowing()) {
-                System.out.println((int) ID.getSelectedItem());
+               
                 ID.setBounds(160, 50, 100, 20);
 
                 ID.addActionListener(this);
@@ -803,7 +803,7 @@ public class AdminMenu extends JFrame implements ActionListener {
             c.add(BName22);
             //show the combobox for the list of cars and it's lapbel
             Object tmpelid = Booking.getBooking_List().get(elid).getObjCar().getID();
-            System.out.println(tmpelid);
+           
 
            
 
