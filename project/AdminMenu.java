@@ -39,6 +39,7 @@ public class AdminMenu extends JFrame implements ActionListener {
     JComboBox EorAParameter4 = new JComboBox();
     JComboBox EorAParameter5 = new JComboBox();
     ReadAndWrite file;
+    private JLabel pp;
 
     Container c = getContentPane();
     private BufferedImage image;
@@ -72,6 +73,9 @@ public class AdminMenu extends JFrame implements ActionListener {
         c.add(DeleteB);
         c.add(EditB);
         ButtonGroup group2 = new ButtonGroup();
+         pp = new JLabel(new ImageIcon("cars2.jpg"));
+        pp.setBounds(120, 0, 700, 360);
+        c.add(pp);
         group2.add(BookingB);
         group2.add(CarB);
         group2.add(CustomerB);
@@ -147,23 +151,25 @@ public class AdminMenu extends JFrame implements ActionListener {
         if (e.getSource().equals(ViewB) || e.getSource().equals(AddB) || e.getSource().equals(DeleteB) || e.getSource().equals(EditB)) {
 
             defaultDrawings();
-
+             displayBackground(1);
         } else if (e.getSource().equals(BookingB)) {
             defaultDrawings();
             BookingIntialize();
+             displayBackground(1);
         } else if (e.getSource().equals(CarB)) {
             defaultDrawings();
             CarIntialize();
-
+             displayBackground(1);
         } else if (e.getSource().equals(CustomerB)) {
             defaultDrawings();
             CustomerIntialize();
-
+             displayBackground(1);
         }
 
         if (e.getSource().equals(ID)) {
             defaultDrawings();
             BookingDrawings();
+             displayBackground(0);
 
         } else if (e.getSource().equals(ID1)) {
 
@@ -182,6 +188,7 @@ public class AdminMenu extends JFrame implements ActionListener {
             } else {
                 CarDrawings();
             }
+             displayBackground(0);
 
         } else if (e.getSource().equals(ID2)) {
             defaultDrawings();
@@ -199,6 +206,7 @@ public class AdminMenu extends JFrame implements ActionListener {
             } else {
                 CustomerDrawings();
             }
+             displayBackground(0);
 
         }
 
@@ -220,6 +228,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                 CustomerIntialize();
 
             }
+             displayBackground(0);
         } else if (e.getSource().equals(addjoe)) {
             if (BookingB.isSelected()) {
                 if (EorAParameter1.getText().isEmpty() || EorAParameter2.getText().isEmpty()) {
@@ -232,6 +241,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                     Booking.addBooking(new Booking(EorAParameter1.getText(), EorAParameter2.getText(), Car.getCarList().get((Integer) ID1.getSelectedItem()), Customer.getCustomer_list().get((Integer) ID2.getSelectedItem())));
                     defaultDrawings();
                     BookingIntialize();
+                    displayBackground(0);
                     JOptionPane.showMessageDialog(null, "Added Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
                 }
 
@@ -247,6 +257,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                     Car.addCar(new Car(EorAParameter2.getText(), EorAParameter1.getText(), parseInt(EorAParameter3.getText())));
                     defaultDrawings();
                     CarIntialize();
+                    displayBackground(0);
                     JOptionPane.showMessageDialog(null, "Added Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
                 }
                     
@@ -268,6 +279,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                     Customer.addcustomer(new Customer(EorAParameter1.getText(), (parseInt(EorAParameter2.getText())), (parseInt(EorAParameter6.getText()))));
                     defaultDrawings();
                     CustomerIntialize();
+                    displayBackground(0);
                     EorAParameter6.setText("");
                     JOptionPane.showMessageDialog(null, "Added Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
                 }
@@ -276,6 +288,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                 }
 
             }
+             
         } else if (e.getSource().equals(editjoe)) {
             if (BookingB.isSelected()) {
                 if (EorAParameter1.getText().isEmpty() || EorAParameter2.getText().isEmpty()) {
@@ -295,6 +308,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                     Temp.setObjCustomer(Customer.getCustomer_list().get((Integer) ID2.getSelectedItem()));
                     defaultDrawings();
                     BookingIntialize();
+                     displayBackground(0);
                     JOptionPane.showMessageDialog(null, "Edited Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
                 }
 
@@ -310,6 +324,7 @@ public class AdminMenu extends JFrame implements ActionListener {
                     Temp.setPrice(parseInt(EorAParameter3.getText()));
                     defaultDrawings();
                     CarIntialize();
+                     displayBackground(0);
                     JOptionPane.showMessageDialog(null, "Edited Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
                 }
 
@@ -322,10 +337,25 @@ public class AdminMenu extends JFrame implements ActionListener {
                     Temp.setAge(parseInt(EorAParameter2.getText()));
                     defaultDrawings();
                     CustomerIntialize();
+                     displayBackground(0);
                     JOptionPane.showMessageDialog(null, "Edited Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
                 }
 
             }
+             displayBackground(0);
+        }
+
+    }
+    
+      private void displayBackground(int focus) {
+        if (focus == 0) {
+            pp = new JLabel(new ImageIcon("cars3.jpg"));
+            pp.setBounds(120, 0, 700, 360);
+            c.add(pp);
+        } else {
+            pp = new JLabel(new ImageIcon("cars2.jpg"));
+            pp.setBounds(120, 0, 700, 360);
+            c.add(pp);
         }
 
     }

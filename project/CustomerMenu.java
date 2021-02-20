@@ -119,15 +119,14 @@ public class CustomerMenu extends JFrame implements ActionListener {
 
     private void displayBackground(int focus) {
         if (focus == 0) {
-              pp = new JLabel(new ImageIcon("cars3.jpg"));
-               pp.setBounds(120, 0, 700, 360);
-               c.add(pp);
+            pp = new JLabel(new ImageIcon("cars3.jpg"));
+            pp.setBounds(120, 0, 700, 360);
+            c.add(pp);
         } else {
-             pp = new JLabel(new ImageIcon("cars2.jpg"));
-              pp.setBounds(120, 0, 700, 360);
+            pp = new JLabel(new ImageIcon("cars2.jpg"));
+            pp.setBounds(120, 0, 700, 360);
             c.add(pp);
         }
-       
 
     }
 
@@ -184,7 +183,9 @@ public class CustomerMenu extends JFrame implements ActionListener {
             Booking.deleteBooking((int) ID.getSelectedItem());
             defaultDrawings();
             BookingIntialize();
+             displayBackground(0);
             JOptionPane.showMessageDialog(null, "Deleted Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
+            
 
         } else if (e.getSource().equals(addjoe)) {
 
@@ -199,6 +200,7 @@ public class CustomerMenu extends JFrame implements ActionListener {
                     PayMethod q1 = new PayMethod(Tempp);
                     defaultDrawings();
                     BookingIntialize();
+                     displayBackground(0);
 
                 }
 
@@ -220,6 +222,7 @@ public class CustomerMenu extends JFrame implements ActionListener {
                     Temp.setObjCustomer(speed);
                     defaultDrawings();
                     BookingIntialize();
+                     displayBackground(0);
                     JOptionPane.showMessageDialog(null, "Edited Successfully", "Success", JOptionPane.PLAIN_MESSAGE);
                 }
 
@@ -247,8 +250,8 @@ public class CustomerMenu extends JFrame implements ActionListener {
         if (ViewB.isSelected()) {
 
             for (int i = 0; i < Booking.getBooking_List().size(); i++) {
-                if (speed.getCustomer_ID() == Booking.getBooking_List().get(i).getObjCustomer().getCustomer_ID()) {
-                    if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
+                if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
+                    if (speed.getCustomer_ID() == Booking.getBooking_List().get(i).getObjCustomer().getCustomer_ID()) {
                         ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
                     }
                 }
@@ -295,8 +298,9 @@ public class CustomerMenu extends JFrame implements ActionListener {
         } else if (DeleteB.isSelected()) {
 
             for (int i = 0; i < Booking.getBooking_List().size(); i++) {
-                if (speed.getCustomer_ID() == Booking.getBooking_List().get(i).getObjCustomer().getCustomer_ID()) {
-                    if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
+
+                if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
+                    if (speed.getCustomer_ID() == Booking.getBooking_List().get(i).getObjCustomer().getCustomer_ID()) {
 
                         ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
                     }
@@ -317,9 +321,8 @@ public class CustomerMenu extends JFrame implements ActionListener {
             //add combo box for bookings
 
             for (int i = 0; i < Booking.getBooking_List().size(); i++) {
-                if (speed.getCustomer_ID() == Booking.getBooking_List().get(i).getObjCustomer().getCustomer_ID()) {
-                    if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
-
+                if (Booking.getBooking_List().get(i).getBooking_Start() != null) {
+                    if (speed.getCustomer_ID() == Booking.getBooking_List().get(i).getObjCustomer().getCustomer_ID()) {
                         ID.addItem(Booking.getBooking_List().get(i).getBooking_id());
                     }
                 }

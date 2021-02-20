@@ -27,6 +27,8 @@ public class Project {
       Booking b2=new Booking("1/1/2020","5/5/2020",c2,c4);
 
       Booking.addBooking(b2); 
+       Car c7 = new Car(" 2020" , " toyota" , 1300);
+      Car.addCar(c7);
    //   PayMethod q1 = new PayMethod(b2);
     //CustomerMenu c77=new CustomerMenu(c3);
 //      AdminMenu s1 = new AdminMenu();
